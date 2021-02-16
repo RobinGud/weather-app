@@ -1,0 +1,15 @@
+.favorites {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.weather-current-place {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column: 1 / 3;
+}
