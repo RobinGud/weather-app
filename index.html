@@ -5,196 +5,297 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <title>Weather landing</title>
   </head>
   <body>
-    <header class="weather-current-place">
-      <div class="header">
-        <h2 class="title">Погода здесь</h2>
-        <button class="button">Обновить геолокацию</button>
-      </div>
-      <div>
-        <h3 class="city-name">Saint Petersburg</h3>
-        <img class="weather_badge" src="./img/sunny-and-cloud-m.png" alt="" />
-        <span class="temperature">8°C</span>
-      </div>
-      <ul>
-        <li class="city-info__item">
-          Ветер<span class="city-info__value"
-            >Moderate breeze, 6.0m/s, North-northwest</span
-          >
-        </li>
-        <li class="city-info__item">
-          Облачность<span class="city-info__value">Broken clouds</span>
-        </li>
-        <li class="city-info__item">
-          Давление<span class="city-info__value">1013 hpa</span>
-        </li>
-        <li class="city-info__item">
-          Влажность<span class="city-info__value">52 %</span>
-        </li>
-        <li class="city-info__item">
-          Координаты<span class="city-info__value">[59.88, 30.42]</span>
-        </li>
-      </ul>
-    </header>
+    <div class="wrapper">
+      <header class="weather-current-place">
+        <div class="header">
+          <h2 class="city-name">Погода здесь</h2>
+          <button class="button header__button-update">
+            Обновить геолокацию
+          </button>
+        </div>
+        <div class="current-city">
+          <h3 class="city-name">Saint Petersburg</h3>
+          <img class="weather_badge" src="./img/sunny-and-cloud-m.png" alt="" />
+          <span class="temperature">8°C</span>
+        </div>
+        <ul class="city-info">
+          <li class="city-info__item">
+            Ветер<span class="city-info__value">
+              Moderate breeze, 6.0m/s, North-northwest</span
+            >
+          </li>
+          <li class="city-info__item">
+            Облачность<span class="city-info__value">Broken clouds</span>
+          </li>
+          <li class="city-info__item">
+            Давление<span class="city-info__value">1013 hpa</span>
+          </li>
+          <li class="city-info__item">
+            Влажность<span class="city-info__value">52 %</span>
+          </li>
+          <li class="city-info__item">
+            Координаты<span class="city-info__value">[59.88, 30.42]</span>
+          </li>
+        </ul>
+      </header>
 
-    <article class="favorites">
-      <h2 class="title">Избранное</h2>
-      <div>
-        <input class="input" type="text" />
-        <button class="button">+</button>
-      </div>
-      <div class="weather-city">
-        <h4>class="city-name"Moscow</h4>
-        <span class="temperature">5°C</span>
-        <img class="weather_badge" src="./img/sunny-and-cloud-s.png" alt="" />
-        <button class="button"></button>
-        <ul class="city-info">
-          <li class="city-info__item">
-            Ветер<span class="city-info__value"
-              >Moderate breeze, 6.0m/s, North-northwest</span
-            >
-          </li>
-          <li class="city-info__item">
-            Облачность<span class="city-info__value">Broken clouds</span>
-          </li>
-          <li class="city-info__item">
-            Давление<span class="city-info__value">1013 hpa</span>
-          </li>
-          <li class="city-info__item">
-            Влажность<span class="city-info__value">52 %</span>
-          </li>
-          <li class="city-info__item">
-            Координаты<span class="city-info__value">[59.88, 30.42]</span>
-          </li>
-        </ul>
-      </div>
-      <div class="weather-city">
-        <h4 class="city-name">Moscow</h4>
-        <span class="temperature">5°C</span>
-        <img class="weather_badge" src="./img/sunny-and-cloud-s.png" alt="" />
-        <button class="button"></button>
-        <ul class="city-info">
-          <li class="city-info__item">
-            Ветер<span class="city-info__value"
-              >Moderate breeze, 6.0m/s, North-northwest</span
-            >
-          </li>
-          <li class="city-info__item">
-            Облачность<span class="city-info__value">Broken clouds</span>
-          </li>
-          <li class="city-info__item">
-            Давление<span class="city-info__value">1013 hpa</span>
-          </li>
-          <li class="city-info__item">
-            Влажность<span class="city-info__value">52 %</span>
-          </li>
-          <li class="city-info__item">
-            Координаты<span class="city-info__value">[59.88, 30.42]</span>
-          </li>
-        </ul>
-      </div>
-      <div class="weather-city">
-        <h4 class="city-name">Moscow</h4>
-        <span class="temperature">5°C</span>
-        <img class="weather_badge" src="./img/sunny-and-cloud-s.png" alt="" />
-        <button class="button"></button>
-        <ul class="city-info">
-          <li class="city-info__item">
-            Ветер<span class="city-info__value"
-              >Moderate breeze, 6.0m/s, North-northwest</span
-            >
-          </li>
-          <li class="city-info__item">
-            Облачность<span class="city-info__value">Broken clouds</span>
-          </li>
-          <li class="city-info__item">
-            Давление<span class="city-info__value">1013 hpa</span>
-          </li>
-          <li class="city-info__item">
-            Влажность<span class="city-info__value">52 %</span>
-          </li>
-          <li class="city-info__item">
-            Координаты<span class="city-info__value">[59.88, 30.42]</span>
-          </li>
-        </ul>
-      </div>
-      <div class="weather-city">
-        <h4 class="city-name">Moscow</h4>
-        <span class="temperature">5°C</span>
-        <img class="weather_badge" src="./img/sunny-and-cloud-s.png" alt="" />
-        <button class="button"></button>
-        <ul class="city-info">
-          <li class="city-info__item">
-            Ветер<span class="city-info__value"
-              >Moderate breeze, 6.0m/s, North-northwest</span
-            >
-          </li>
-          <li class="city-info__item">
-            Облачность<span class="city-info__value">Broken clouds</span>
-          </li>
-          <li class="city-info__item">
-            Давление<span class="city-info__value">1013 hpa</span>
-          </li>
-          <li class="city-info__item">
-            Влажность<span class="city-info__value">52 %</span>
-          </li>
-          <li class="city-info__item">
-            Координаты<span class="city-info__value">[59.88, 30.42]</span>
-          </li>
-        </ul>
-      </div>
-      <div class="weather-city">
-        <h4 class="city-name">Moscow</h4>
-        <span class="temperature">5°C</span>
-        <img class="weather_badge" src="./img/sunny-and-cloud-s.png" alt="" />
-        <button class="button"></button>
-        <ul class="city-info">
-          <li class="city-info__item">
-            Ветер<span class="city-info__value"
-              >Moderate breeze, 6.0m/s, North-northwest</span
-            >
-          </li>
-          <li class="city-info__item">
-            Облачность<span class="city-info__value">Broken clouds</span>
-          </li>
-          <li class="city-info__item">
-            Давление<span class="city-info__value">1013 hpa</span>
-          </li>
-          <li class="city-info__item">
-            Влажность<span class="city-info__value">52 %</span>
-          </li>
-          <li class="city-info__item">
-            Координаты<span class="city-info__value">[59.88, 30.42]</span>
-          </li>
-        </ul>
-      </div>
-      <div class="weather-city">
-        <h4 class="city-name">Moscow</h4>
-        <span class="temperature">5°C</span>
-        <img class="weather_badge" src="./img/sunny-and-cloud-s.png" alt="" />
-        <button class="button"></button>
-        <ul class="city-info">
-          <li class="city-info__item">
-            Ветер<span class="city-info__value"
-              >Moderate breeze, 6.0m/s, North-northwest</span
-            >
-          </li>
-          <li class="city-info__item">
-            Облачность<span class="city-info__value">Broken clouds</span>
-          </li>
-          <li class="city-info__item">
-            Давление<span class="city-info__value">1013 hpa</span>
-          </li>
-          <li class="city-info__item">
-            Влажность<span class="city-info__value">52 %</span>
-          </li>
-          <li class="city-info__item">
-            Координаты<span class="city-info__value">[59.88, 30.42]</span>
-          </li>
-        </ul>
-      </div>
-    </article>
+      <article class="favorites">
+        <div class="header">
+          <h2 class="title">Избранное</h2>
+          <div class="form">
+            <input class="input form__input" type="text" />
+            <button class="button form__button_add">+</button>
+          </div>
+        </div>
+        <div class="weather-city">
+          <div class="city-header">
+            <h4 class="city-name">Moscow</h4>
+            <span class="temperature">5°C</span>
+            <img
+              class="weather_badge"
+              src="./img/sunny-and-cloud-s.png"
+              alt=""
+            />
+            <button class="button button__remove">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 40 40"
+                width="40px"
+              >
+                <path d="M10,30 L30,10" class="button__path" />
+                <path d="M10,10 L30,30" class="button__path" />
+              </svg>
+            </button>
+          </div>
+          <ul class="city-info" class="city-info">
+            <li class="city-info__item">
+              Ветер<span class="city-info__value">
+                Moderate breeze, 6.0m/s, North-northwest</span
+              >
+            </li>
+            <li class="city-info__item">
+              Облачность<span class="city-info__value">Broken clouds</span>
+            </li>
+            <li class="city-info__item">
+              Давление<span class="city-info__value">1013 hpa</span>
+            </li>
+            <li class="city-info__item">
+              Влажность<span class="city-info__value">52 %</span>
+            </li>
+            <li class="city-info__item">
+              Координаты<span class="city-info__value">[59.88, 30.42]</span>
+            </li>
+          </ul>
+        </div>
+        <div class="weather-city">
+          <div class="city-header">
+            <h4 class="city-name">Moscow</h4>
+            <span class="temperature">5°C</span>
+            <img
+              class="weather_badge"
+              src="./img/sunny-and-cloud-s.png"
+              alt=""
+            />
+            <button class="button button__remove">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 40 40"
+                width="40px"
+              >
+                <path d="M10,30 L30,10" class="button__path" />
+                <path d="M10,10 L30,30" class="button__path" />
+              </svg>
+            </button>
+          </div>
+          <ul class="city-info" class="city-info">
+            <li class="city-info__item">
+              Ветер<span class="city-info__value">
+                Moderate breeze, 6.0m/s, North-northwest</span
+              >
+            </li>
+            <li class="city-info__item">
+              Облачность<span class="city-info__value">Broken clouds</span>
+            </li>
+            <li class="city-info__item">
+              Давление<span class="city-info__value">1013 hpa</span>
+            </li>
+            <li class="city-info__item">
+              Влажность<span class="city-info__value">52 %</span>
+            </li>
+            <li class="city-info__item">
+              Координаты<span class="city-info__value">[59.88, 30.42]</span>
+            </li>
+          </ul>
+        </div>
+        <div class="weather-city">
+          <div class="city-header">
+            <h4 class="city-name">Moscow</h4>
+            <span class="temperature">5°C</span>
+            <img
+              class="weather_badge"
+              src="./img/sunny-and-cloud-s.png"
+              alt=""
+            />
+            <button class="button button__remove">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 40 40"
+                width="40px"
+              >
+                <path d="M10,30 L30,10" class="button__path" />
+                <path d="M10,10 L30,30" class="button__path" />
+              </svg>
+            </button>
+          </div>
+          <ul class="city-info" class="city-info">
+            <li class="city-info__item">
+              Ветер<span class="city-info__value">
+                Moderate breeze, 6.0m/s, North-northwest</span
+              >
+            </li>
+            <li class="city-info__item">
+              Облачность<span class="city-info__value">Broken clouds</span>
+            </li>
+            <li class="city-info__item">
+              Давление<span class="city-info__value">1013 hpa</span>
+            </li>
+            <li class="city-info__item">
+              Влажность<span class="city-info__value">52 %</span>
+            </li>
+            <li class="city-info__item">
+              Координаты<span class="city-info__value">[59.88, 30.42]</span>
+            </li>
+          </ul>
+        </div>
+        <div class="weather-city">
+          <div class="city-header">
+            <h4 class="city-name">Moscow</h4>
+            <span class="temperature">5°C</span>
+            <img
+              class="weather_badge"
+              src="./img/sunny-and-cloud-s.png"
+              alt=""
+            />
+            <button class="button button__remove">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 40 40"
+                width="40px"
+              >
+                <path d="M10,30 L30,10" class="button__path" />
+                <path d="M10,10 L30,30" class="button__path" />
+              </svg>
+            </button>
+          </div>
+          <ul class="city-info" class="city-info">
+            <li class="city-info__item">
+              Ветер<span class="city-info__value">
+                Moderate breeze, 6.0m/s, North-northwest</span
+              >
+            </li>
+            <li class="city-info__item">
+              Облачность<span class="city-info__value">Broken clouds</span>
+            </li>
+            <li class="city-info__item">
+              Давление<span class="city-info__value">1013 hpa</span>
+            </li>
+            <li class="city-info__item">
+              Влажность<span class="city-info__value">52 %</span>
+            </li>
+            <li class="city-info__item">
+              Координаты<span class="city-info__value">[59.88, 30.42]</span>
+            </li>
+          </ul>
+        </div>
+        <div class="weather-city">
+          <div class="city-header">
+            <h4 class="city-name">Moscow</h4>
+            <span class="temperature">5°C</span>
+            <img
+              class="weather_badge"
+              src="./img/sunny-and-cloud-s.png"
+              alt=""
+            />
+            <button class="button button__remove">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 40 40"
+                width="40px"
+              >
+                <path d="M10,30 L30,10" class="button__path" />
+                <path d="M10,10 L30,30" class="button__path" />
+              </svg>
+            </button>
+          </div>
+          <ul class="city-info" class="city-info">
+            <li class="city-info__item">
+              Ветер<span class="city-info__value">
+                Moderate breeze, 6.0m/s, North-northwest</span
+              >
+            </li>
+            <li class="city-info__item">
+              Облачность<span class="city-info__value">Broken clouds</span>
+            </li>
+            <li class="city-info__item">
+              Давление<span class="city-info__value">1013 hpa</span>
+            </li>
+            <li class="city-info__item">
+              Влажность<span class="city-info__value">52 %</span>
+            </li>
+            <li class="city-info__item">
+              Координаты<span class="city-info__value">[59.88, 30.42]</span>
+            </li>
+          </ul>
+        </div>
+        <div class="weather-city">
+          <div class="city-header">
+            <h4 class="city-name">Moscow</h4>
+            <span class="temperature">5°C</span>
+            <img
+              class="weather_badge"
+              src="./img/sunny-and-cloud-s.png"
+              alt=""
+            />
+            <button class="button button__remove">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 40 40"
+                width="40px"
+              >
+                <path d="M10,30 L30,10" class="button__path" />
+                <path d="M10,10 L30,30" class="button__path" />
+              </svg>
+            </button>
+          </div>
+          <ul class="city-info" class="city-info">
+            <li class="city-info__item">
+              Ветер<span class="city-info__value">
+                Moderate breeze, 6.0m/s, North-northwest</span
+              >
+            </li>
+            <li class="city-info__item">
+              Облачность<span class="city-info__value">Broken clouds</span>
+            </li>
+            <li class="city-info__item">
+              Давление<span class="city-info__value">1013 hpa</span>
+            </li>
+            <li class="city-info__item">
+              Влажность<span class="city-info__value">52 %</span>
+            </li>
+            <li class="city-info__item">
+              Координаты<span class="city-info__value">[59.88, 30.42]</span>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </div>
   </body>
 </html>

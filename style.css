@@ -1,1 +1,86 @@
+* {
+  padding: 0;
+  margin: 0;
+}
 
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: aqua;
+  margin: 20px;
+}
+
+.wrapper {
+  margin: auto;
+  max-width: 960px;
+}
+
+.weather-current-place {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2em 4em;
+}
+
+.favorites {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2em 4em;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column: 1 / -1;
+}
+.header__button-update {
+  grid-column: 2;
+}
+
+/* .current-city {
+  grid-column: 1;
+} */
+
+/* .weather-city {
+  grid-column: 1;
+} */
+
+.city-info__item {
+  list-style-type: none;
+  background-color: #aaa;
+  padding: 5px 0px;
+  margin: 5px 0px;
+}
+
+.form {
+  grid-column: 3;
+}
+
+.city-name {
+  font-weight: bold;
+}
+
+.city-header {
+  display: grid;
+  grid-template-columns: repeat(2, auto) 100px 50px;
+}
+
+.city-name {
+  font-size: 2em;
+}
+
+.temperature {
+  font-size: 2em;
+}
+
+.button__remove {
+  border: 0px;
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: #555;
+}
+
+.button__path {
+  color: white;
+  stroke: white;
+  stroke-width: 1;
+}
