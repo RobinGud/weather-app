@@ -49,46 +49,24 @@ body {
   grid-column: 1;
 } */
 
+.city-info {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .city-info__item {
   list-style-type: none;
   background-color: #aaa;
   padding: 5px 0px;
   margin: 5px 0px;
   padding-left: 10px;
-}
-
-.form {
-  grid-column: 3;
-}
-
-.city-name {
-  font-weight: bold;
-  font-size: 1.5em;
   display: block;
-  margin: auto;
-}
-
-.city-header {
-  display: grid;
-  grid-template-columns: repeat(2, auto) 100px 50px;
+  flex-basis: 100%;
+  font-weight: 600;
 }
 
 h2 {
   font-size: 2.3em;
-}
-
-.temperature {
-  font-size: 1.5em;
-  display: block;
-  margin: auto;
-}
-
-.button_circle {
-  border: 0px;
-  border-radius: 20px;
-  width: 40px;
-  height: 40px;
-  background-color: #555;
 }
 
 .path {
@@ -100,6 +78,7 @@ h2 {
 .city-info__value {
   float: right;
   padding-right: 10px;
+  font-weight: 400;
 }
 
 .weather_badge_big {
@@ -110,7 +89,24 @@ h2 {
   float: right;
   font-size: 6em;
 }
+
+.form {
+  grid-column: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .form__input {
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #eee;
+  font-size: 1.5em;
+  display: block;
+}
+
+/* .form__input {
   height: 40px;
   border: none;
   border-radius: 5px;
@@ -119,9 +115,53 @@ h2 {
   display: block;
   float: left;
   font-size: 2.5em;
-}
+} */
 
 .button__add {
-  float: right;
-  margin-right: 10px;
+  margin-left: 5px;
+}
+
+/* test */
+/* ul.s3 {
+  display: flex;
+  flex-wrap: wrap;
+}
+ul.s3 li {
+  flex-basis: 50%;
+  display: block;
+  background-color: #444;
+  margin: 2px; */
+
+/* .weather_badge {
+  margin-top: 10px;
+} */
+
+.city-header {
+  /* display: grid;
+  grid-template-columns: repeat(2, auto) 100px 50px; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.temperature {
+  font-size: 1.5em;
+  /* display: block; */
+  /* margin: auto; */
+}
+
+.button_circle {
+  border: 0px;
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: #555;
+  /* margin: auto; */
+}
+
+.city-name {
+  /* font-weight: bold; */
+  font-size: 1.5em;
+  /* display: block; */
+  margin: auto 10px;
 }
