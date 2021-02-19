@@ -82,12 +82,12 @@ h2 {
 }
 
 .weather_badge_big {
-  margin: 15px;
+  margin: 15px 0;
 }
 
 .temperature_big {
   float: right;
-  font-size: 6em;
+  font-size: 5.9em;
 }
 
 .form {
@@ -164,4 +164,33 @@ ul.s3 li {
   font-size: 1.5em;
   /* display: block; */
   margin: auto 10px;
+}
+
+.button {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 640px) {
+  .weather-current-place {
+    grid-template-columns: 1fr;
+    padding-bottom: 10px;
+  }
+
+  .favorites {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1em 0em;
+  }
+
+  .form__input {
+    /* font-size: 1em; */
+    width: calc(100% - 40px);
+  }
+
+  .form {
+    grid-column: 1 / 3;
+  }
 }
