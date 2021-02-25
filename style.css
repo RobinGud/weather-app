@@ -10,7 +10,6 @@ body {
 .wrapper {
   margin: auto;
   max-width: 960px;
-  background-color: aqua;
   padding: 10px;
 }
 
@@ -39,6 +38,10 @@ body {
   background-color: #ddd;
   color: #444;
   font-size: 1em;
+}
+
+.header__button-update:hover {
+  background-color: #aaa;
 }
 
 .city-info {
@@ -118,6 +121,10 @@ h2 {
   background-color: #555;
 }
 
+.button_circle:hover {
+  background-color: #333;
+}
+
 .city-name {
   font-size: 1.5em;
   margin: auto 10px;
@@ -131,7 +138,6 @@ h2 {
 @media screen and (max-width: 640px) {
   .weather-current-place {
     grid-template-columns: 1fr;
-    /* padding-bottom: 10px; */
   }
 
   .favorites {
