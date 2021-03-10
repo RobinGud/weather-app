@@ -1,0 +1,134 @@
+*
+    padding: 0
+    margin: 0
+
+body
+    font-family: "Montserrat", sans-serif
+
+.wrapper
+    margin: auto
+    max-width: 960px
+    padding: 10px
+
+.weather-current-place
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    grid-gap: 2em 4em
+    margin-bottom: 2em
+
+.favorites
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    grid-gap: 2em 4em
+
+.header
+    display: grid
+    grid-template-columns: repeat(3, 1fr)
+    grid-column: 1 / -1
+
+.header__button-update
+    grid-column: 2
+    border-radius: 5px
+    border: none
+    background-color: #ddd
+    color: #444
+    font-size: 1em
+    &:hover
+        background-color: #aaa
+
+.city-info
+    display: flex
+    flex-wrap: wrap
+
+.city-info__item
+    list-style-type: none
+    background-color: #aaa
+    padding: 5px
+    margin: 5px 0px
+    display: block
+    flex-basis: 100%
+    font-weight: 600
+
+h2
+    font-size: 2.3em
+
+.city-info__value
+    float: right
+    font-weight: 400
+
+.current-city__header
+    display: flex
+    justify-content: space-around
+    align-content: center
+
+.temperature_big
+    font-size: 5.9em
+
+.form
+    grid-column: 3
+    display: flex
+    align-items: center
+    justify-content: flex-end
+
+.form__input
+    height: 40px
+    border: none
+    border-radius: 5px
+    background-color: #eee
+    font-size: 1.5em
+    display: block
+
+.button__add
+    margin-left: 10px
+
+.city-header
+    display: flex
+    align-items: center
+    justify-content: space-between
+
+.temperature
+    font-size: 1.5em
+
+.button_circle
+    border: 0px
+    border-radius: 20px
+    width: 40px
+    height: 40px
+    background-color: #555
+    &:hover
+        background-color: #333
+
+.city-name
+    font-size: 1.5em
+    margin: auto 10px
+
+.button
+    cursor: pointer
+    outline: none
+
+@media screen and (max-width: 640px)
+    .weather-current-place, .favorites
+        grid-template-columns: 1fr
+
+    .header
+        grid-template-columns: 1fr 50px
+        grid-gap: 1em 0em
+
+    .form__input
+        width: calc(100% - 40px)
+
+    .form
+        grid-column: 1 / 3
+
+    .header__button-update
+        background: url(./img/reload_s.png) 50% 50% no-repeat
+        background-size: 70%
+        width: 40px
+        height: 40px
+        border: 0px
+        border-radius: 20px
+        background-color: #bbb
+        margin: auto
+
+    .text_hidden
+        display: none
