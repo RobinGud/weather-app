@@ -15,13 +15,10 @@
   </head>
   <body>
     <div class="wrapper">
-      <header class="weather-current-place">
+      <header class="weather-current-place" id="current">
         <div class="header">
           <h2 class="title">Погода здесь</h2>
-          <button
-            class="button header__button-update"
-            onclick="getCurrentPosition()"
-          >
+          <button class="button header__button-update" onclick="test()">
             <span class="text_hidden">Обновить геолокацию</span>
           </button>
         </div>
@@ -33,26 +30,26 @@
               src="./img/sunny-and-cloud-m.png"
               alt=""
             />
-            <span class="temperature_big">8°C</span>
+            <span class="temperature_big temperature">8°C</span>
           </div>
         </div>
         <ul class="city-info">
           <li class="city-info__item">
-            Ветер<span class="city-info__value">
+            Ветер<span class="city-info__value wind">
               Moderate breeze, 6.0m/s, North-northwest</span
             >
           </li>
           <li class="city-info__item">
-            Облачность<span class="city-info__value">Broken clouds</span>
+            Облачность<span class="city-info__value cloud">Broken clouds</span>
           </li>
           <li class="city-info__item">
-            Давление<span class="city-info__value">1013 hpa</span>
+            Давление<span class="city-info__value pressure">1013 hpa</span>
           </li>
           <li class="city-info__item">
-            Влажность<span class="city-info__value">52 %</span>
+            Влажность<span class="city-info__value humidity">52 %</span>
           </li>
           <li class="city-info__item">
-            Координаты<span class="city-info__value">[59.88, 30.42]</span>
+            Координаты<span class="city-info__value coord">[59.88, 30.42]</span>
           </li>
         </ul>
       </header>
@@ -71,7 +68,7 @@
         <div class="weather-city">
           <div class="city-header">
             <h4 class="city-name">Moscow</h4>
-            <span class="temperature">5°C</span>
+            <span class="temperature_small temperature">5°C</span>
             <img
               class="weather_badge"
               src="./img/sunny-and-cloud-s.png"
@@ -105,7 +102,7 @@
         <div class="weather-city">
           <div class="city-header">
             <h4 class="city-name">Moscow</h4>
-            <span class="temperature">5°C</span>
+            <span class="temperature_small temperature">5°C</span>
             <img
               class="weather_badge"
               src="./img/sunny-and-cloud-s.png"
@@ -139,7 +136,7 @@
         <div class="weather-city">
           <div class="city-header">
             <h4 class="city-name">Moscow</h4>
-            <span class="temperature">5°C</span>
+            <span class="temperature_small temperature">5°C</span>
             <img
               class="weather_badge"
               src="./img/sunny-and-cloud-s.png"
@@ -173,7 +170,7 @@
         <div class="weather-city">
           <div class="city-header">
             <h4 class="city-name">Moscow</h4>
-            <span class="temperature">5°C</span>
+            <span class="temperature_small temperature">5°C</span>
             <img
               class="weather_badge"
               src="./img/sunny-and-cloud-s.png"
@@ -207,7 +204,7 @@
         <div class="weather-city">
           <div class="city-header">
             <h4 class="city-name">Moscow</h4>
-            <span class="temperature">5°C</span>
+            <span class="temperature_small temperature">5°C</span>
             <img
               class="weather_badge"
               src="./img/sunny-and-cloud-s.png"
@@ -241,7 +238,7 @@
         <div class="weather-city">
           <div class="city-header">
             <h4 class="city-name">Moscow</h4>
-            <span class="temperature">5°C</span>
+            <span class="temperature_small temperature">5°C</span>
             <img
               class="weather_badge"
               src="./img/sunny-and-cloud-s.png"
