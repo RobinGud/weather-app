@@ -88,11 +88,14 @@ const getCurrentPosition = () => {
     // xhr.setRequestHeader("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com");
     
     // xhr.send(data);
+
+    // test();
     reqAPI(latitude, longitude)
   }
 
   const reqAPI = (latitude, longitude) => {
-    fetch(`https://community-open-weather-map.p.rapidapi.com/weather?lat=${latitude}&lon=${longitude}&callback=test`, {
+    fetch(`https://community-open-weather-map.p.rapidapi.com/weather?lat=${latitude}&lon=${longitude}`, {
+      //&callback=test
       "method": "GET",
       "headers": {
         "x-rapidapi-key": "cadf04a247msh09c8c1c6bee7505p1a566ajsn5c1a379faca1",
@@ -104,7 +107,8 @@ const getCurrentPosition = () => {
     // .then(resBody => {console.log(resBody)})
         .then(resBody => {
           // console.log(resBody);
-          eval(resBody);
+          // eval(resBody);
+          test(resBody)
         })
         .catch(err => {
           console.error(err);
@@ -129,13 +133,16 @@ const numToStringCloud = (num) => {
   return arr[Math.round(num / 10)]
 }
 
-const test = (data = obj) => {
+const test = (data = obj, id = "current") => {
+console.log("🚀 ~ file: test.js ~ line 135 ~ test ~ id", id)
+console.log("🚀 ~ file: test.js ~ line 135 ~ test ~ data", data)
   // console.log(data)
   // console.log(data.name)
 
-  let city = document.getElementById('current');
+  let city = document.getElementById(id);
   // console.log("🚀 ~ file: test.js ~ line 126 ~ test ~ city", city)
   city.querySelector('.city-name').innerHTML = data.name
+  console.log("🚀 ~ file: test.js ~ line 145 ~ test ~ city.querySelector('.city-name').innerHTML = data.name", city.querySelector('.city-name').innerHTML = data.name)
   city.querySelector('.temperature').innerHTML = `${Math.round(data.main.temp - 273)}°C`
   city.querySelector('.wind').innerHTML = `${data.wind.speed} m/s, ${degToCompass(data.wind.deg)}`
   city.querySelector('.cloud').innerHTML = numToStringCloud(data.clouds.all)
@@ -160,6 +167,7 @@ const addFavoriteCity = (name = null) => {
     countCityCard++
     // console.log("🚀 ~ file: test.js ~ line 160 ~ addFavoriteCity ~ document.getElementById(`fav-city-${countCityCard}`)", document.getElementById(`fav-city-${countCityCard}`))
   }
+
   // console.log("🚀 ~ file: test.js ~ line 159 ~ addFavoriteCity ~ countCityCard", countCityCard)
 
   // console.log("🚀 ~ file: test.js ~ line 157 ~ addFavoriteCity ~ parent", parent)
@@ -178,21 +186,21 @@ const addFavoriteCity = (name = null) => {
   </div>
   <ul class="city-info" class="city-info">
     <li class="city-info__item">
-      Ветер<span class="city-info__value">
+      Ветер<span class="city-info__value wind">
         Moderate breeze, 6.0m/s, North-northwest</span
       >
     </li>
     <li class="city-info__item">
-      Облачность<span class="city-info__value">Broken clouds</span>
+      Облачность<span class="city-info__value cloud">Broken clouds</span>
     </li>
     <li class="city-info__item">
-      Давление<span class="city-info__value">1013 hpa</span>
+      Давление<span class="city-info__value pressure">1013 hpa</span>
     </li>
     <li class="city-info__item">
-      Влажность<span class="city-info__value">52 %</span>
+      Влажность<span class="city-info__value humidity">52 %</span>
     </li>
     <li class="city-info__item">
-      Координаты<span class="city-info__value">[59.88, 30.42]</span>
+      Координаты<span class="city-info__value coord">[59.88, 30.42]</span>
     </li>
   </ul>
 </div>`
@@ -201,4 +209,5 @@ const addFavoriteCity = (name = null) => {
 
 
 parent.insertAdjacentHTML("beforeEnd", cityCard)
+test(undefined, `fav-city-${countCityCard}`);
 }
