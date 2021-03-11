@@ -60,8 +60,17 @@
       <article class="favorites">
         <div class="header">
           <h2 class="title">Избранное</h2>
-          <form class="form" name="form">
-            <input class="input form__input" type="text" name="zxc" />
+          <form class="form" name="addCityForm">
+            <input
+              class="input form__input"
+              list="cities"
+              type="text"
+              name="cityName"
+            />
+            <datalist id="cities">
+              <option value="Moscow" />
+              <option value="Saint Petersburg" />
+            </datalist>
             <button
               class="button button_circle button__add"
               type="button"

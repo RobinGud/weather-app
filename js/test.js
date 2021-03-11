@@ -48,6 +48,39 @@ let obj = {
   "cod":200
 }
 
+let citiesObj = [
+  {
+      "id": 833,
+      "name": "Ḩeşār-e Sefīd",
+      "state": "",
+      "country": "IR",
+      "coord": {
+          "lon": 47.159401,
+          "lat": 34.330502
+      }
+  },
+  {
+      "id": 2960,
+      "name": "‘Ayn Ḩalāqīm",
+      "state": "",
+      "country": "SY",
+      "coord": {
+          "lon": 36.321911,
+          "lat": 34.940079
+      }
+  },
+  {
+      "id": 3245,
+      "name": "Taglag",
+      "state": "",
+      "country": "IR",
+      "coord": {
+          "lon": 44.98333,
+          "lat": 38.450001
+      }
+  }
+]
+
 const getCurrentPosition = () => {
   // if (navigator.geolocation) {
   //   navigator.geolocation.getCurrentPosition(function (position) {
@@ -153,6 +186,7 @@ const numToStringCloud = (num) => {
 
 const delFavoriteCity = (id) => {
   let el = document.getElementById(`fav-city-${id}`)
+  localStorage.removeItem(id);
   // console.log("🚀 ~ file: updateHtmlData.js ~ line 149 ~ delFavoriteCity ~ el", el)
   el.remove()
 }
@@ -170,21 +204,23 @@ const addFavoriteCity = () => {
   // form.addEventListener("submit", function(event) {
     // console.log("Saving value", form.elements.value.value);
     // name.preventDefault();
+let cityName = addCityForm.cityName.value
+// console.losg("🚀 ~ file: test.js ~ line 174 ~ //form.addEventListener ~ cityName", cityName)
 
+// send req with form.zxc.value
 
-  // send req with form.zxc.value
-
-  // console.log("🚀 ~ file: test.js ~ line 161 ~ addFavoriteCity ~ e.document.forms();", document.forms.city.value)
+// console.log("🚀 ~ file: test.js ~ line 161 ~ addFavoriteCity ~ e.document.forms();", document.forms.city.value)
 // reques to API
-  let data = obj
-  let parent = document.querySelector('.favorites')
+let data = obj
+let parent = document.querySelector('.favorites')
 
-  let countCityCard = document.querySelectorAll(".weather-city").length
-  while (document.getElementById(`fav-city-${countCityCard}`)) {
-    countCityCard++
-    // console.log("🚀 ~ file: updateHtmlData.js ~ line 160 ~ addFavoriteCity ~ document.getElementById(`fav-city-${countCityCard}`)", document.getElementById(`fav-city-${countCityCard}`))
-  }
+let countCityCard = document.querySelectorAll(".weather-city").length
+while (document.getElementById(`fav-city-${countCityCard}`)) {
+  countCityCard++
+  // console.log("🚀 ~ file: updateHtmlData.js ~ line 160 ~ addFavoriteCity ~ document.getElementById(`fav-city-${countCityCard}`)", document.getElementById(`fav-city-${countCityCard}`))
+}
 
+localStorage.setItem(countCityCard, cityName)
   // console.log("🚀 ~ file: updateHtmlData.js ~ line 159 ~ addFavoriteCity ~ countCityCard", countCityCard)
 
   // console.log("🚀 ~ file: updateHtmlData.js ~ line 157 ~ addFavoriteCity ~ parent", parent)
