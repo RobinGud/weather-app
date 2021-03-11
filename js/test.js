@@ -130,11 +130,11 @@ const numToStringCloud = (num) => {
 }
 
 const test = (data = obj) => {
-  console.log(data)
-  console.log(data.name)
+  // console.log(data)
+  // console.log(data.name)
 
   let city = document.getElementById('current');
-  console.log("🚀 ~ file: test.js ~ line 126 ~ test ~ city", city)
+  // console.log("🚀 ~ file: test.js ~ line 126 ~ test ~ city", city)
   city.querySelector('.city-name').innerHTML = data.name
   city.querySelector('.temperature').innerHTML = `${Math.round(data.main.temp - 273)}°C`
   city.querySelector('.wind').innerHTML = `${data.wind.speed} m/s, ${degToCompass(data.wind.deg)}`
@@ -142,4 +142,63 @@ const test = (data = obj) => {
   city.querySelector('.pressure').innerHTML = `${data.main.pressure} hpa`
   city.querySelector('.humidity').innerHTML = `${data.main.humidity} %`
   city.querySelector('.coord').innerHTML = `[${data.coord.lat}, ${data.coord.lon}]` 
+}
+
+const delFavoriteCity = (id) => {
+  let el = document.getElementById(`fav-city-${id}`)
+  // console.log("🚀 ~ file: test.js ~ line 149 ~ delFavoriteCity ~ el", el)
+  el.remove()
+}
+
+const addFavoriteCity = (name = null) => {
+// reques to API
+  let data = obj
+  let parent = document.querySelector('.favorites')
+
+  let countCityCard = document.querySelectorAll(".weather-city").length
+  while (document.getElementById(`fav-city-${countCityCard}`)) {
+    countCityCard++
+    // console.log("🚀 ~ file: test.js ~ line 160 ~ addFavoriteCity ~ document.getElementById(`fav-city-${countCityCard}`)", document.getElementById(`fav-city-${countCityCard}`))
+  }
+  // console.log("🚀 ~ file: test.js ~ line 159 ~ addFavoriteCity ~ countCityCard", countCityCard)
+
+  // console.log("🚀 ~ file: test.js ~ line 157 ~ addFavoriteCity ~ parent", parent)
+  let cityCard = `<div class="weather-city" id="fav-city-${countCityCard}">
+  <div class="city-header">
+    <h4 class="city-name">Moscow</h4>
+    <span class="temperature_small temperature">5°C</span>
+    <img
+      class="weather_badge"
+      src="./img/sunny-and-cloud-s.png"
+      alt=""
+    />
+    <button class="button button_circle" onclick="delFavoriteCity(${countCityCard})">
+      <img src="./img/remove.svg" alt="x" />
+    </button>
+  </div>
+  <ul class="city-info" class="city-info">
+    <li class="city-info__item">
+      Ветер<span class="city-info__value">
+        Moderate breeze, 6.0m/s, North-northwest</span
+      >
+    </li>
+    <li class="city-info__item">
+      Облачность<span class="city-info__value">Broken clouds</span>
+    </li>
+    <li class="city-info__item">
+      Давление<span class="city-info__value">1013 hpa</span>
+    </li>
+    <li class="city-info__item">
+      Влажность<span class="city-info__value">52 %</span>
+    </li>
+    <li class="city-info__item">
+      Координаты<span class="city-info__value">[59.88, 30.42]</span>
+    </li>
+  </ul>
+</div>`
+// console.log("🚀 ~ file: test.js ~ line 159 ~ addFavoriteCity ~ cityCard", cityCard)
+
+
+
+parent.insertAdjacentHTML("beforeEnd", cityCard)
 }
