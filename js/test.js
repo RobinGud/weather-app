@@ -83,19 +83,19 @@ const getCurrentPosition = () => {
     //   }
     // });
     
-    // xhr.open("GET", `https://community-open-weather-map.p.rapidapi.com/weather?lat=${latitude}&lon=${longitude}&callback=test`);
+    // xhr.open("GET", `https://community-open-weather-map.p.rapidapi.com/weather?lat=${latitude}&lon=${longitude}&callback=updateHtmlData`);
     // xhr.setRequestHeader("x-rapidapi-key", "cadf04a247msh09c8c1c6bee7505p1a566ajsn5c1a379faca1");
     // xhr.setRequestHeader("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com");
     
     // xhr.send(data);
 
-    // test();
+    // updateHtmlData();
     reqAPI(latitude, longitude)
   }
 
   const reqAPI = (latitude, longitude) => {
     fetch(`https://community-open-weather-map.p.rapidapi.com/weather?lat=${latitude}&lon=${longitude}`, {
-      //&callback=test
+      //&callback=updateHtmlData
       "method": "GET",
       "headers": {
         "x-rapidapi-key": "cadf04a247msh09c8c1c6bee7505p1a566ajsn5c1a379faca1",
@@ -108,7 +108,7 @@ const getCurrentPosition = () => {
         .then(resBody => {
           // console.log(resBody);
           // eval(resBody);
-          test(resBody)
+          updateHtmlData(resBody)
         })
         .catch(err => {
           console.error(err);
@@ -122,6 +122,24 @@ const getCurrentPosition = () => {
   
 }
 
+const updateHtmlData = (data = obj, id = "current") => {
+// console.log("🚀 ~ file: updateHtmlData.js ~ line 135 ~ updateHtmlData ~ id", id)
+// console.log("🚀 ~ file: updateHtmlData.js ~ line 135 ~ updateHtmlData ~ data", data)
+  // console.log(data)
+  // console.log(data.name)
+
+  let city = document.getElementById(id);
+  // console.log("🚀 ~ file: updateHtmlData.js ~ line 126 ~ updateHtmlData ~ city", city)
+  city.querySelector('.city-name').innerHTML = data.name
+  // console.log("🚀 ~ file: updateHtmlData.js ~ line 145 ~ updateHtmlData ~ city.querySelector('.city-name').innerHTML = data.name", city.querySelector('.city-name').innerHTML = data.name)
+  city.querySelector('.temperature').innerHTML = `${Math.round(data.main.temp - 273)}°C`
+  city.querySelector('.wind').innerHTML = `${data.wind.speed} m/s, ${degToCompass(data.wind.deg)}`
+  city.querySelector('.cloud').innerHTML = numToStringCloud(data.clouds.all)
+  city.querySelector('.pressure').innerHTML = `${data.main.pressure} hpa`
+  city.querySelector('.humidity').innerHTML = `${data.main.humidity} %`
+  city.querySelector('.coord').innerHTML = `[${data.coord.lat}, ${data.coord.lon}]` 
+}
+
 function degToCompass(num) {
   var val = Math.floor((num / 22.5) + 0.5);
   var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
@@ -133,31 +151,30 @@ const numToStringCloud = (num) => {
   return arr[Math.round(num / 10)]
 }
 
-const test = (data = obj, id = "current") => {
-console.log("🚀 ~ file: test.js ~ line 135 ~ test ~ id", id)
-console.log("🚀 ~ file: test.js ~ line 135 ~ test ~ data", data)
-  // console.log(data)
-  // console.log(data.name)
-
-  let city = document.getElementById(id);
-  // console.log("🚀 ~ file: test.js ~ line 126 ~ test ~ city", city)
-  city.querySelector('.city-name').innerHTML = data.name
-  console.log("🚀 ~ file: test.js ~ line 145 ~ test ~ city.querySelector('.city-name').innerHTML = data.name", city.querySelector('.city-name').innerHTML = data.name)
-  city.querySelector('.temperature').innerHTML = `${Math.round(data.main.temp - 273)}°C`
-  city.querySelector('.wind').innerHTML = `${data.wind.speed} m/s, ${degToCompass(data.wind.deg)}`
-  city.querySelector('.cloud').innerHTML = numToStringCloud(data.clouds.all)
-  city.querySelector('.pressure').innerHTML = `${data.main.pressure} hpa`
-  city.querySelector('.humidity').innerHTML = `${data.main.humidity} %`
-  city.querySelector('.coord').innerHTML = `[${data.coord.lat}, ${data.coord.lon}]` 
-}
-
 const delFavoriteCity = (id) => {
   let el = document.getElementById(`fav-city-${id}`)
-  // console.log("🚀 ~ file: test.js ~ line 149 ~ delFavoriteCity ~ el", el)
+  // console.log("🚀 ~ file: updateHtmlData.js ~ line 149 ~ delFavoriteCity ~ el", el)
   el.remove()
 }
 
-const addFavoriteCity = (name = null) => {
+
+// let form = document.querySelector("form");
+// form.addEventListener("submit", function (event) {
+//   event.preventDefault();
+//   // console.log("Saving value", form.elements[0].value);
+// });
+
+const addFavoriteCity = () => {
+// console.log("🚀 ~ file: test.js ~ line 168 ~ addFavoriteCity ~ event", form.zxc.value)
+  // var form = document.querySelector("form");
+  // form.addEventListener("submit", function(event) {
+    // console.log("Saving value", form.elements.value.value);
+    // name.preventDefault();
+
+
+  // send req with form.zxc.value
+
+  // console.log("🚀 ~ file: test.js ~ line 161 ~ addFavoriteCity ~ e.document.forms();", document.forms.city.value)
 // reques to API
   let data = obj
   let parent = document.querySelector('.favorites')
@@ -165,12 +182,12 @@ const addFavoriteCity = (name = null) => {
   let countCityCard = document.querySelectorAll(".weather-city").length
   while (document.getElementById(`fav-city-${countCityCard}`)) {
     countCityCard++
-    // console.log("🚀 ~ file: test.js ~ line 160 ~ addFavoriteCity ~ document.getElementById(`fav-city-${countCityCard}`)", document.getElementById(`fav-city-${countCityCard}`))
+    // console.log("🚀 ~ file: updateHtmlData.js ~ line 160 ~ addFavoriteCity ~ document.getElementById(`fav-city-${countCityCard}`)", document.getElementById(`fav-city-${countCityCard}`))
   }
 
-  // console.log("🚀 ~ file: test.js ~ line 159 ~ addFavoriteCity ~ countCityCard", countCityCard)
+  // console.log("🚀 ~ file: updateHtmlData.js ~ line 159 ~ addFavoriteCity ~ countCityCard", countCityCard)
 
-  // console.log("🚀 ~ file: test.js ~ line 157 ~ addFavoriteCity ~ parent", parent)
+  // console.log("🚀 ~ file: updateHtmlData.js ~ line 157 ~ addFavoriteCity ~ parent", parent)
   let cityCard = `<div class="weather-city" id="fav-city-${countCityCard}">
   <div class="city-header">
     <h4 class="city-name">Moscow</h4>
@@ -204,10 +221,10 @@ const addFavoriteCity = (name = null) => {
     </li>
   </ul>
 </div>`
-// console.log("🚀 ~ file: test.js ~ line 159 ~ addFavoriteCity ~ cityCard", cityCard)
+// console.log("🚀 ~ file: updateHtmlData.js ~ line 159 ~ addFavoriteCity ~ cityCard", cityCard)
 
 
 
 parent.insertAdjacentHTML("beforeEnd", cityCard)
-test(undefined, `fav-city-${countCityCard}`);
+updateHtmlData(undefined, `fav-city-${countCityCard}`);
 }

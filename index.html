@@ -18,7 +18,10 @@
       <header class="weather-current-place" id="current">
         <div class="header">
           <h2 class="title">Погода здесь</h2>
-          <button class="button header__button-update" onclick="test()">
+          <button
+            class="button header__button-update"
+            onclick="updateHtmlData()"
+          >
             <span class="text_hidden">Обновить геолокацию</span>
           </button>
         </div>
@@ -57,15 +60,16 @@
       <article class="favorites">
         <div class="header">
           <h2 class="title">Избранное</h2>
-          <div class="form">
-            <input class="input form__input" type="text" />
+          <form class="form" name="form">
+            <input class="input form__input" type="text" name="zxc" />
             <button
               class="button button_circle button__add"
+              type="button"
               onclick="addFavoriteCity()"
             >
               <img src="./img/add.svg" alt="+" />
             </button>
-          </div>
+          </form>
         </div>
       </article>
     </div>
