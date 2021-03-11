@@ -82,89 +82,48 @@ let citiesObj = [
 ]
 
 const getCurrentPosition = () => {
-  // if (navigator.geolocation) {
-  //   navigator.geolocation.getCurrentPosition(function (position) {
-  //     var latitude = position.coords.latitude;
-  //     var longitude = position.coords.longitude;
-  //     alert(latitude + " " + longitude);
-  //   });
-  // } else {
-  //   alert("Geolocation API не поддерживается в вашем браузере");
-  // }
 
   navigator.geolocation.getCurrentPosition(success, error, {
-    // высокая точность
     enableHighAccuracy: true
   })
   
-  function success({ coords }) {
-    // получаем широту и долготу
-    const { latitude, longitude } = coords
-    //const position = [latitude, longitude]
-    //console.log(position) // [широта, долгота]
-
-
-    // Rapid API
-    // const data = null;
-
-    // const xhr = new XMLHttpRequest();
-    // xhr.withCredentials = false;
-    
-    // xhr.addEventListener("readystatechange", function () {
-    //   if (this.readyState === this.DONE) {
-    //     console.log(this.responseText);
-    //   }
-    // });
-    
-    // xhr.open("GET", `https://community-open-weather-map.p.rapidapi.com/weather?lat=${latitude}&lon=${longitude}&callback=updateHtmlData`);
-    // xhr.setRequestHeader("x-rapidapi-key", "cadf04a247msh09c8c1c6bee7505p1a566ajsn5c1a379faca1");
-    // xhr.setRequestHeader("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com");
-    
-    // xhr.send(data);
-
-    // updateHtmlData();
-    reqAPI(latitude, longitude)
+  function success({coords}) {
+    reqAPI(undefined, coords, undefined)
   }
 
-  const reqAPI = (latitude, longitude) => {
-    fetch(`https://community-open-weather-map.p.rapidapi.com/weather?lat=${latitude}&lon=${longitude}`, {
-      //&callback=updateHtmlData
+  function error({ message }) {
+    console.log(message)
+  }
+
+}
+  const reqAPI = (name, coords, id) => {
+let url = 'https://community-open-weather-map.p.rapidapi.com/weather?'
+if (!name) {
+  url += `lat=${coords.latitude}&lon=${coords.longitude}`
+}
+else {
+  url += `q=${name}`
+}
+
+    fetch(url, {
       "method": "GET",
       "headers": {
         "x-rapidapi-key": "cadf04a247msh09c8c1c6bee7505p1a566ajsn5c1a379faca1",
         "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com"
       },
-      //"mode": "cors"
         })
         .then(resp => {return resp.text()})
-    // .then(resBody => {console.log(resBody)})
         .then(resBody => {
-          // console.log(resBody);
-          // eval(resBody);
-          updateHtmlData(resBody)
+          updateHtmlData(JSON.parse(resBody), id)
         })
         .catch(err => {
           console.error(err);
         });
   }
 
-  
-  function error({ message }) {
-    console.log(message) // при отказе в доступе получаем PositionError: User denied Geolocation
-  }
-  
-}
-
 const updateHtmlData = (data = obj, id = "current") => {
-// console.log("🚀 ~ file: updateHtmlData.js ~ line 135 ~ updateHtmlData ~ id", id)
-// console.log("🚀 ~ file: updateHtmlData.js ~ line 135 ~ updateHtmlData ~ data", data)
-  // console.log(data)
-  // console.log(data.name)
-
   let city = document.getElementById(id);
-  // console.log("🚀 ~ file: updateHtmlData.js ~ line 126 ~ updateHtmlData ~ city", city)
   city.querySelector('.city-name').innerHTML = data.name
-  // console.log("🚀 ~ file: updateHtmlData.js ~ line 145 ~ updateHtmlData ~ city.querySelector('.city-name').innerHTML = data.name", city.querySelector('.city-name').innerHTML = data.name)
   city.querySelector('.temperature').innerHTML = `${Math.round(data.main.temp - 273)}°C`
   city.querySelector('.wind').innerHTML = `${data.wind.speed} m/s, ${degToCompass(data.wind.deg)}`
   city.querySelector('.cloud').innerHTML = numToStringCloud(data.clouds.all)
@@ -187,43 +146,27 @@ const numToStringCloud = (num) => {
 const delFavoriteCity = (id) => {
   let el = document.getElementById(`fav-city-${id}`)
   localStorage.removeItem(id);
-  // console.log("🚀 ~ file: updateHtmlData.js ~ line 149 ~ delFavoriteCity ~ el", el)
   el.remove()
 }
 
-
-// let form = document.querySelector("form");
-// form.addEventListener("submit", function (event) {
-//   event.preventDefault();
-//   // console.log("Saving value", form.elements[0].value);
-// });
-
 const addFavoriteCity = () => {
-// console.log("🚀 ~ file: test.js ~ line 168 ~ addFavoriteCity ~ event", form.zxc.value)
-  // var form = document.querySelector("form");
-  // form.addEventListener("submit", function(event) {
-    // console.log("Saving value", form.elements.value.value);
-    // name.preventDefault();
 let cityName = addCityForm.cityName.value
-// console.losg("🚀 ~ file: test.js ~ line 174 ~ //form.addEventListener ~ cityName", cityName)
-
-// send req with form.zxc.value
-
-// console.log("🚀 ~ file: test.js ~ line 161 ~ addFavoriteCity ~ e.document.forms();", document.forms.city.value)
-// reques to API
 let data = obj
-let parent = document.querySelector('.favorites')
 
 let countCityCard = document.querySelectorAll(".weather-city").length
 while (document.getElementById(`fav-city-${countCityCard}`)) {
   countCityCard++
-  // console.log("🚀 ~ file: updateHtmlData.js ~ line 160 ~ addFavoriteCity ~ document.getElementById(`fav-city-${countCityCard}`)", document.getElementById(`fav-city-${countCityCard}`))
 }
 
 localStorage.setItem(countCityCard, cityName)
-  // console.log("🚀 ~ file: updateHtmlData.js ~ line 159 ~ addFavoriteCity ~ countCityCard", countCityCard)
+createFavoriteCityCard(countCityCard)
+reqAPI(cityName, undefined, `fav-city-${countCityCard}`)
+}
 
-  // console.log("🚀 ~ file: updateHtmlData.js ~ line 157 ~ addFavoriteCity ~ parent", parent)
+const createFavoriteCityCard = (countCityCard) => {
+
+  let parent = document.querySelector('.favorites')
+
   let cityCard = `<div class="weather-city" id="fav-city-${countCityCard}">
   <div class="city-header">
     <h4 class="city-name">Moscow</h4>
@@ -257,10 +200,17 @@ localStorage.setItem(countCityCard, cityName)
     </li>
   </ul>
 </div>`
-// console.log("🚀 ~ file: updateHtmlData.js ~ line 159 ~ addFavoriteCity ~ cityCard", cityCard)
-
-
 
 parent.insertAdjacentHTML("beforeEnd", cityCard)
-updateHtmlData(undefined, `fav-city-${countCityCard}`);
 }
+
+function showFavorites() {
+    let keys = Object.keys(localStorage)
+
+        for(let i = 0; i < keys.length; i++) {
+          createFavoriteCityCard(keys[i]);
+          reqAPI(localStorage.getItem(keys[i]), undefined, `fav-city-${keys[i]}`)
+        }
+}
+
+showFavorites();

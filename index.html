@@ -20,7 +20,7 @@
           <h2 class="title">Погода здесь</h2>
           <button
             class="button header__button-update"
-            onclick="updateHtmlData()"
+            onclick="getCurrentPosition()"
           >
             <span class="text_hidden">Обновить геолокацию</span>
           </button>
@@ -63,11 +63,11 @@
           <form class="form" name="addCityForm">
             <input
               class="input form__input"
-              list="cities"
+              list="cities-list"
               type="text"
               name="cityName"
             />
-            <datalist id="cities">
+            <datalist id="cities-list">
               <option value="Moscow" />
               <option value="Saint Petersburg" />
             </datalist>
