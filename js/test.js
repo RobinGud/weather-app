@@ -1,3 +1,6 @@
+const favCityPrefix = "fav-city-"
+let cities = []
+
 let obj = {
   "coord":
   {
@@ -48,41 +51,7 @@ let obj = {
   "cod": 200
 }
 
-let citiesObj = [
-  {
-    "id": 833,
-    "name": "Ḩeşār-e Sefīd",
-    "state": "",
-    "country": "IR",
-    "coord": {
-      "lon": 47.159401,
-      "lat": 34.330502
-    }
-  },
-  {
-    "id": 2960,
-    "name": "‘Ayn Ḩalāqīm",
-    "state": "",
-    "country": "SY",
-    "coord": {
-      "lon": 36.321911,
-      "lat": 34.940079
-    }
-  },
-  {
-    "id": 3245,
-    "name": "Taglag",
-    "state": "",
-    "country": "IR",
-    "coord": {
-      "lon": 44.98333,
-      "lat": 38.450001
-    }
-  }
-]
-
 const getCurrentPosition = () => {
-
   navigator.geolocation.getCurrentPosition(success, error, {
     enableHighAccuracy: true
   })
@@ -99,11 +68,11 @@ const getCurrentPosition = () => {
 
 const reqAPI = (name, coords, id) => {
   let url = 'https://community-open-weather-map.p.rapidapi.com/weather?'
-  if (!name) {
-    url += `lat=${coords.latitude}&lon=${coords.longitude}`
+  if (name) {
+    url += `q=${name}`
   }
   else {
-    url += `q=${name}`
+    url += `lat=${coords.latitude}&lon=${coords.longitude}`
   }
 
   fetch(url, {
@@ -113,9 +82,9 @@ const reqAPI = (name, coords, id) => {
       "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com"
     },
   })
-    .then(resp => { return resp.text() })
-    .then(resBody => {
-      updateHtmlData(JSON.parse(resBody), id)
+    .then(res => { return res.text() })
+    .then(body => {
+      updateHtmlData(JSON.parse(body), id)
     })
     .catch(err => {
       console.error(err);
@@ -123,18 +92,18 @@ const reqAPI = (name, coords, id) => {
 }
 
 const updateHtmlData = (data = obj, id = "current") => {
-  let city = document.getElementById(id);
-  city.querySelector('.city-name').innerHTML = data.name
-  city.querySelector('.temperature').innerHTML = `${Math.round(data.main.temp - 273)}°C`
-  city.querySelector('.wind').innerHTML = `${data.wind.speed} m/s, ${degToCompass(data.wind.deg)}`
-  city.querySelector('.cloud').innerHTML = numToStringCloud(data.clouds.all)
-  city.querySelector('.pressure').innerHTML = `${data.main.pressure} hpa`
-  city.querySelector('.humidity').innerHTML = `${data.main.humidity} %`
-  city.querySelector('.coord').innerHTML = `[${data.coord.lat}, ${data.coord.lon}]`
+  let cityCard = document.getElementById(id);
+  cityCard.querySelector('.city-name').innerHTML = data.name
+  cityCard.querySelector('.temperature').innerHTML = `${Math.round(data.main.temp - 273)}°C`
+  cityCard.querySelector('.wind').innerHTML = `${data.wind.speed} m/s, ${degToCompass(data.wind.deg)}`
+  cityCard.querySelector('.cloud').innerHTML = numToStringCloud(data.clouds.all)
+  cityCard.querySelector('.pressure').innerHTML = `${data.main.pressure} hpa`
+  cityCard.querySelector('.humidity').innerHTML = `${data.main.humidity} %`
+  cityCard.querySelector('.coord').innerHTML = `[${data.coord.lat}, ${data.coord.lon}]`
 }
 
-function degToCompass(num) {
-  var val = Math.floor((num / 22.5) + 0.5);
+function degToCompass(deg) {
+  var val = Math.floor((deg / 22.5) + 0.5);
   var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
   return arr[(val % 16)];
 }
@@ -145,30 +114,37 @@ const numToStringCloud = (num) => {
 }
 
 const delFavoriteCity = (id) => {
-  let el = document.getElementById(`fav-city-${id}`)
+  let el = document.getElementById(favCityPrefix + id)
   localStorage.removeItem(id);
   el.remove()
 }
 
 const addFavoriteCity = () => {
   let cityName = addCityForm.cityName.value
-  let data = obj
+  let data = obj // заглушка
+  // console.log(cities[1])
 
-  let countCityCard = document.querySelectorAll(".weather-city").length
-  while (document.getElementById(`fav-city-${countCityCard}`)) {
-    countCityCard++
-  }
+  // let сityCardNumber = document.querySelectorAll(".weather-city").length
+  // while (document.getElementById(favCityPrefix + сityCardNumber)) {
+  //   сityCardNumber++
+  // }
+let сityCardNumber = (cities.find(item => (item.name == cityName)).id
+  // return console.log(item.id)
+)
+  // console.log("🚀 ~ file: test.js ~ line 134 ~ addFavoriteCity ~ сityCardNumber", сityCardNumber)
 
-  localStorage.setItem(countCityCard, cityName)
-  createFavoriteCityCard(countCityCard)
-  reqAPI(cityName, undefined, `fav-city-${countCityCard}`)
+ if(localStorage.getItem(сityCardNumber)) return
+
+  localStorage.setItem(сityCardNumber, cityName)
+  createFavoriteCityCard(сityCardNumber)
+  reqAPI(cityName, undefined, (favCityPrefix + сityCardNumber))
 }
 
 const createFavoriteCityCard = (countCityCard) => {
 
   let parent = document.querySelector('.favorites')
 
-  let cityCard = `<div class="weather-city" id="fav-city-${countCityCard}">
+  let cityCard = `<div class="weather-city" id="${favCityPrefix +countCityCard}">
   <div class="city-header">
     <h4 class="city-name">Moscow</h4>
     <span class="temperature_small temperature">5°C</span>
@@ -211,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   for (let i = 0; i < keys.length; i++) {
     createFavoriteCityCard(keys[i]);
-    reqAPI(localStorage.getItem(keys[i]), undefined, `fav-city-${keys[i]}`)
+    reqAPI(localStorage.getItem(keys[i]), undefined, (favCityPrefix + keys[i]))
   }
 
   fetch("/json/cities.json", {
@@ -219,12 +195,10 @@ document.addEventListener("DOMContentLoaded", () => {
   })
   .then(res => { return res.text()})
   .then(body => { 
-    let cities = JSON.parse(body)
-    console.log("🚀 ~ file: test.js ~ line 223 ~ document.addEventListener ~ citiesJson", cities)
+    cities = JSON.parse(body)
   let parent =  document.getElementById("cities-list")
   cities.forEach((cityName) => {
-    console.log("🚀 ~ file: test.js ~ line 226 ~ cities.forEach ~ cityName", cityName)
-    parent.insertAdjacentHTML("beforeEnd", `<option value="${cityName}" />`)
+    parent.insertAdjacentHTML("beforeEnd", `<option value="${cityName.name}"/>`)
     
   })
     })

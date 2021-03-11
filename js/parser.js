@@ -8,10 +8,11 @@ try {
   for (let i = 0; i < json.length; i++) {
     let cur = json[i]
     if(cur.country == 'RU'){
-      // let obj = {
-      //     "name": cur.name,
-      // }
-      newJson.push(cur.name)
+      let obj = {
+          "name": cur.name,
+          "id": cur.id
+      }
+      newJson.push(obj)
     }
   }
     fs.writeFileSync('../json/cities.json', JSON.stringify(newJson))
