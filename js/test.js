@@ -213,4 +213,23 @@ document.addEventListener("DOMContentLoaded", () => {
     createFavoriteCityCard(keys[i]);
     reqAPI(localStorage.getItem(keys[i]), undefined, `fav-city-${keys[i]}`)
   }
+
+  fetch("/json/cities.json", {
+    "method": "GET"
+  })
+  .then(res => { return res.text()})
+  .then(body => { 
+    let cities = JSON.parse(body)
+    console.log("🚀 ~ file: test.js ~ line 223 ~ document.addEventListener ~ citiesJson", cities)
+  let parent =  document.getElementById("cities-list")
+  cities.forEach((cityName) => {
+    console.log("🚀 ~ file: test.js ~ line 226 ~ cities.forEach ~ cityName", cityName)
+    parent.insertAdjacentHTML("beforeEnd", `<option value="${cityName}" />`)
+    
+  })
+    })
+    .catch(err => {
+      console.error(err);
+    });
+  
 });
