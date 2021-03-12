@@ -121,8 +121,8 @@ const delFavoriteCity = (id) => {
 
 const addFavoriteCity = () => {
   let cityName = addCityForm.cityName.value
-  let data = obj // заглушка
 let сityId = (cities.find(item => (item.name == cityName)).id)
+addCityForm.cityName.value = ""
 
  if (localStorage.getItem(сityId)) return
 
