@@ -61,7 +61,7 @@ const getCurrentPosition = () => {
   }
 
   function error({ message }) {
-    console.log(message)
+    console.warn(message)
   }
 
 }
@@ -122,22 +122,13 @@ const delFavoriteCity = (id) => {
 const addFavoriteCity = () => {
   let cityName = addCityForm.cityName.value
   let data = obj // заглушка
-  // console.log(cities[1])
+let сityId = (cities.find(item => (item.name == cityName)).id)
 
-  // let сityCardNumber = document.querySelectorAll(".weather-city").length
-  // while (document.getElementById(favCityPrefix + сityCardNumber)) {
-  //   сityCardNumber++
-  // }
-let сityCardNumber = (cities.find(item => (item.name == cityName)).id
-  // return console.log(item.id)
-)
-  // console.log("🚀 ~ file: test.js ~ line 134 ~ addFavoriteCity ~ сityCardNumber", сityCardNumber)
+ if (localStorage.getItem(сityId)) return
 
- if(localStorage.getItem(сityCardNumber)) return
-
-  localStorage.setItem(сityCardNumber, cityName)
-  createFavoriteCityCard(сityCardNumber)
-  reqAPI(cityName, undefined, (favCityPrefix + сityCardNumber))
+  localStorage.setItem(сityId, cityName)
+  createFavoriteCityCard(сityId)
+  reqAPI(cityName, undefined, (favCityPrefix + сityId))
 }
 
 const createFavoriteCityCard = (countCityCard) => {
@@ -185,10 +176,10 @@ const createFavoriteCityCard = (countCityCard) => {
 document.addEventListener("DOMContentLoaded", () => {
   let keys = Object.keys(localStorage)
 
-  for (let i = 0; i < keys.length; i++) {
-    createFavoriteCityCard(keys[i]);
-    reqAPI(localStorage.getItem(keys[i]), undefined, (favCityPrefix + keys[i]))
-  }
+  keys.forEach(cityId => {
+    createFavoriteCityCard(cityId);
+    reqAPI(localStorage.getItem(cityId), undefined, (favCityPrefix + cityId))
+  })
 
   fetch("/json/cities.json", {
     "method": "GET"

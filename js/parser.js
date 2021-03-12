@@ -12,11 +12,14 @@ try {
           "name": cur.name,
           "id": cur.id
       }
+      if (newJson.every((el) => el.name != obj.name)) {
+        count++
       newJson.push(obj)
+      }
     }
   }
     fs.writeFileSync('../json/cities.json', JSON.stringify(newJson))
-  console.log("Файл успешно записан!")
+  console.log("Файл успешно записан! " + count + " Объектов")
 } catch (err) {
   return console.error(err)
 }
