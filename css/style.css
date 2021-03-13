@@ -41,14 +41,6 @@ body {
   grid-column: 1 / -1;
 }
 
-.header__button-update {
-  -ms-grid-column: 2;
-  grid-column: 2;
-  border-radius: 25px;
-  border: none;
-  font-size: 1em;
-}
-
 .city-info {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -70,19 +62,24 @@ body {
   border-radius: 8px;
 }
 
+.city-info__value {
+  float: right;
+  font-weight: 400;
+}
+
 .skeleton {
   background: -webkit-gradient(linear, left top, right top, from(#888), to(#ccc));
   background: linear-gradient(90deg, #888, #ccc);
   background-size: 200% 200%;
-  -webkit-animation: AnimationName 2s ease infinite;
-          animation: AnimationName 2s ease infinite;
+  -webkit-animation: AnimationLoading 2s ease infinite;
+          animation: AnimationLoading 2s ease infinite;
 }
 
 .grey {
   color: #555;
 }
 
-@-webkit-keyframes AnimationName {
+@-webkit-keyframes AnimationLoading {
   0% {
     background-position: 0% 50%;
   }
@@ -94,7 +91,7 @@ body {
   }
 }
 
-@keyframes AnimationName {
+@keyframes AnimationLoading {
   0% {
     background-position: 0% 50%;
   }
@@ -108,11 +105,6 @@ body {
 
 h2 {
   font-size: 2.3em;
-}
-
-.city-info__value {
-  float: right;
-  font-weight: 400;
 }
 
 .current-city {
@@ -164,10 +156,6 @@ h2 {
   display: block;
 }
 
-.button__add {
-  margin-left: 10px;
-}
-
 .city-header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -182,13 +170,6 @@ h2 {
 
 .temperature_small {
   font-size: 1.8em;
-}
-
-.button_circle {
-  border: 0px;
-  border-radius: 20px;
-  width: 40px;
-  height: 40px;
 }
 
 .city-name {
@@ -207,6 +188,25 @@ h2 {
 .button:hover {
   background: -webkit-gradient(linear, left top, right top, from(#92fe9d), to(#00c9ff));
   background: linear-gradient(90deg, #92fe9d, #00c9ff);
+}
+
+.button-update {
+  -ms-grid-column: 2;
+  grid-column: 2;
+  border-radius: 25px;
+  border: none;
+  font-size: 1em;
+}
+
+.button__add {
+  margin-left: 10px;
+}
+
+.button_circle {
+  border: 0px;
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
 }
 
 .card {
@@ -239,17 +239,6 @@ h2 {
         grid-template-columns: 1fr 50px;
     grid-gap: 1em 0em;
   }
-  .favorites > .header h2 {
-    grid-column: span 2;
-  }
-  .form__input {
-    width: calc(100% - 40px);
-  }
-  .form {
-    -ms-grid-column: 1;
-    -ms-grid-column-span: 2;
-    grid-column: 1 / 3;
-  }
   .header__button-update {
     background: url(/img/reload_s.png) 50% 50% no-repeat;
     background-size: 70%;
@@ -259,6 +248,17 @@ h2 {
     border-radius: 20px;
     background-color: #bbb;
     margin: auto;
+  }
+  .favorites > .header h2 {
+    grid-column: span 2;
+  }
+  .form {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    grid-column: 1 / 3;
+  }
+  .form__input {
+    width: calc(100% - 40px);
   }
   .text-hidden_mobile {
     display: none;

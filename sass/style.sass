@@ -28,35 +28,31 @@ body
     grid-template-columns: repeat(3, 1fr)
     grid-column: 1 / -1
 
-.header__button-update
-    grid-column: 2
-    border-radius: 25px
-    border: none
-    font-size: 1em
-
 .city-info
     display: flex
     flex-wrap: wrap
-
-.city-info__item
-    list-style-type: none
-    background: linear-gradient(90deg, #92fe9d, #00c9ff)
-    padding: 7px 10px
-    margin: 5px 0px
-    flex-basis: 100%
-    font-weight: 600
-    min-height: 20px
-    border-radius: 8px
+    &__item
+        list-style-type: none
+        background: linear-gradient(90deg, #92fe9d, #00c9ff)
+        padding: 7px 10px
+        margin: 5px 0px
+        flex-basis: 100%
+        font-weight: 600
+        min-height: 20px
+        border-radius: 8px
+    &__value
+        float: right
+        font-weight: 400
 
 .skeleton
     background: linear-gradient(90deg, #888, #ccc)
     background-size: 200% 200%
-    animation: AnimationName 2s ease infinite
+    animation: AnimationLoading 2s ease infinite
 
 .grey
     color: #555
 
-@keyframes AnimationName
+@keyframes AnimationLoading
     0%
         background-position: 0% 50%
     50%
@@ -67,19 +63,14 @@ body
 h2
     font-size: 2.3em
 
-.city-info__value
-    float: right
-    font-weight: 400
-
 .current-city
     display: flex
     flex-direction: column
     justify-content: space-around
-
-.current-city__header
-    display: flex
-    justify-content: space-around
-    align-content: center
+    &__header
+        display: flex
+        justify-content: space-around
+        align-content: center
 
 .temperature_big
     font-size: 5.128em
@@ -89,17 +80,13 @@ h2
     display: flex
     align-items: center
     justify-content: flex-end
-
-.form__input
-    height: 40px
-    border: none
-    border-radius: 5px
-    background-color: #ddd
-    font-size: 1.5em
-    display: block
-
-.button__add
-    margin-left: 10px
+    &__input
+        height: 40px
+        border: none
+        border-radius: 5px
+        background-color: #ddd
+        font-size: 1.5em
+        display: block
 
 .city-header
     display: flex
@@ -108,12 +95,6 @@ h2
 
 .temperature_small
     font-size: 1.8em
-
-.button_circle
-    border: 0px
-    border-radius: 20px
-    width: 40px
-    height: 40px
 
 .city-name
     font-size: 1.8em
@@ -127,6 +108,18 @@ h2
     font-weight: 400
     &:hover
         background: linear-gradient(90deg, #92fe9d, #00c9ff)
+    &-update
+        grid-column: 2
+        border-radius: 25px
+        border: none
+        font-size: 1em
+    &__add
+        margin-left: 10px
+    &_circle
+        border: 0px
+        border-radius: 20px
+        width: 40px
+        height: 40px
 
 .card
     background: #eee
@@ -150,27 +143,25 @@ h2
     .header
         grid-template-columns: 1fr 50px
         grid-gap: 1em 0em
+        &__button-update
+            background: url(/img/reload_s.png) 50% 50% no-repeat
+            background-size: 70%
+            width: 40px
+            height: 40px
+            border: 0px
+            border-radius: 20px
+            background-color: #bbb
+            margin: auto
 
     .favorites
         & > .header
             h2
                 grid-column: span 2
 
-    .form__input
-        width: calc(100% - 40px)
-
     .form
         grid-column: 1 / 3
-
-    .header__button-update
-        background: url(/img/reload_s.png) 50% 50% no-repeat
-        background-size: 70%
-        width: 40px
-        height: 40px
-        border: 0px
-        border-radius: 20px
-        background-color: #bbb
-        margin: auto
+        &__input
+            width: calc(100% - 40px)
 
     .text-hidden_mobile
         display: none
