@@ -1,56 +1,6 @@
 const favCityPrefix = "fav-city-"
 let cities = []
 
-let obj = {
-  "coord":
-  {
-    "lon": -0.1257,
-    "lat": 51.5085
-  },
-  "weather":
-    [
-      {
-        "id": 804,
-        "main": "Clouds",
-        "description": "overcast clouds",
-        "icon": "04n"
-      }
-    ],
-  "base": "stations",
-  "main":
-  {
-    "temp": 282.09,
-    "feelslike": 276.85,
-    "tempmin": 280.93,
-    "temp_max": 283.15,
-    "pressure": 1018,
-    "humidity": 53
-  },
-  "visibility": 10000,
-  "wind":
-  {
-    "speed": 4.63,
-    "deg": 230
-  },
-  "clouds":
-  {
-    "all": 100
-  },
-  "dt": 1615318418,
-  "sys":
-  {
-    "type": 1,
-    "id": 1414,
-    "country": "GB",
-    "sunrise": 1615271283,
-    "sunset": 1615312453
-  },
-  "timezone": 0,
-  "id": 2643743,
-  "name": "London",
-  "cod": 200
-}
-
 const getCurrentPosition = () => {
   navigator.geolocation.getCurrentPosition(success, error, {
     enableHighAccuracy: true
@@ -95,11 +45,15 @@ const updateHtmlData = (data = obj, id = "current") => {
   let cityCard = document.getElementById(id);
   cityCard.querySelector('.city-name').innerHTML = data.name
   cityCard.querySelector('.temperature').innerHTML = `${Math.round(data.main.temp - 273)}°C`
+  cityCard.querySelector('.weather-badge').src = `/img/${data.weather[0].icon.slice(0, 2)}d.png`
   cityCard.querySelector('.wind').innerHTML = `${data.wind.speed} m/s, ${degToCompass(data.wind.deg)}`
   cityCard.querySelector('.cloud').innerHTML = numToStringCloud(data.clouds.all)
   cityCard.querySelector('.pressure').innerHTML = `${data.main.pressure} hpa`
   cityCard.querySelector('.humidity').innerHTML = `${data.main.humidity} %`
   cityCard.querySelector('.coord').innerHTML = `[${data.coord.lat}, ${data.coord.lon}]`
+  cityCard.querySelectorAll('.text-hidden').forEach(el => el.classList.remove("text-hidden"))
+  cityCard.querySelectorAll('.skeleton').forEach(el => el.classList.remove("skeleton"))
+  cityCard.querySelectorAll('.grey').forEach(el => el.classList.remove("grey"))
 }
 
 function degToCompass(deg) {
@@ -135,13 +89,13 @@ const createFavoriteCityCard = (countCityCard) => {
 
   let parent = document.querySelector('.favorites')
 
-  let cityCard = `<div class="weather-city" id="${favCityPrefix +countCityCard}">
+  let cityCard = `<div class="weather-city card" id="${favCityPrefix +countCityCard}">
   <div class="city-header">
-    <h4 class="city-name">Moscow</h4>
-    <span class="temperature_small temperature">5°C</span>
+    <h4 class="city-name grey">City</h4>
+    <span class="temperature_small temperature grey">5°C</span>
     <img
-      class="weather_badge"
-      src="./img/sunny-and-cloud-s.png"
+      class="weather-badge"
+      src="/img/13d.png"
       alt=""
     />
     <button class="button button_circle" onclick="delFavoriteCity(${countCityCard})">
@@ -149,23 +103,26 @@ const createFavoriteCityCard = (countCityCard) => {
     </button>
   </div>
   <ul class="city-info" class="city-info">
-    <li class="city-info__item">
-      Ветер<span class="city-info__value wind">
-        Moderate breeze, 6.0m/s, North-northwest</span
-      >
-    </li>
-    <li class="city-info__item">
-      Облачность<span class="city-info__value cloud">Broken clouds</span>
-    </li>
-    <li class="city-info__item">
-      Давление<span class="city-info__value pressure">1013 hpa</span>
-    </li>
-    <li class="city-info__item">
-      Влажность<span class="city-info__value humidity">52 %</span>
-    </li>
-    <li class="city-info__item">
-      Координаты<span class="city-info__value coord">[59.88, 30.42]</span>
-    </li>
+  <li class="city-info__item skeleton">
+  <span class="text-hidden">Ветер</span>
+  <span class="city-info__value wind text-hidden"></span>
+</li>
+<li class="city-info__item skeleton">
+  <span class="text-hidden">Облачность</span>
+  <span class="city-info__value cloud text-hidden"></span>
+</li>
+<li class="city-info__item skeleton">
+  <span class="text-hidden">Давление</span>
+  <span class="city-info__value pressure text-hidden"></span>
+</li>
+<li class="city-info__item skeleton">
+  <span class="text-hidden">Влажность</span>
+  <span class="city-info__value humidity text-hidden"></span>
+</li>
+<li class="city-info__item skeleton">
+  <span class="text-hidden">Координаты</span>
+  <span class="city-info__value coord text-hidden"></span>
+</li>
   </ul>
 </div>`
 

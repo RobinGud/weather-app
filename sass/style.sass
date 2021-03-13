@@ -4,22 +4,24 @@
 
 body
     font-family: "Montserrat", sans-serif
+    padding: 2em
+    background: #00c9ff
+    background: linear-gradient(to right, #92fe9d, #00c9ff)
 
 .wrapper
     margin: auto
-    max-width: 960px
-    padding: 10px
+    max-width: 990px
 
 .weather-current-place
     display: grid
     grid-template-columns: repeat(2, 1fr)
-    grid-gap: 2em 4em
+    grid-gap: 2em 2em
     margin-bottom: 2em
 
 .favorites
     display: grid
     grid-template-columns: repeat(2, 1fr)
-    grid-gap: 2em 4em
+    grid-gap: 2em 2em
 
 .header
     display: grid
@@ -28,13 +30,9 @@ body
 
 .header__button-update
     grid-column: 2
-    border-radius: 5px
+    border-radius: 25px
     border: none
-    background-color: #ddd
-    color: #444
     font-size: 1em
-    &:hover
-        background-color: #aaa
 
 .city-info
     display: flex
@@ -42,12 +40,29 @@ body
 
 .city-info__item
     list-style-type: none
-    background-color: #aaa
-    padding: 5px
+    background: linear-gradient(90deg, #92fe9d, #00c9ff)
+    padding: 7px 10px
     margin: 5px 0px
-    display: block
     flex-basis: 100%
     font-weight: 600
+    min-height: 20px
+    border-radius: 8px
+
+.skeleton
+    background: linear-gradient(90deg, #888, #ccc)
+    background-size: 200% 200%
+    animation: AnimationName 2s ease infinite
+
+.grey
+    color: #555
+
+@keyframes AnimationName
+    0%
+        background-position: 0% 50%
+    50%
+        background-position: 100% 50%
+    100%
+        background-position: 0% 50%
 
 h2
     font-size: 2.3em
@@ -56,13 +71,18 @@ h2
     float: right
     font-weight: 400
 
+.current-city
+    display: flex
+    flex-direction: column
+    justify-content: space-around
+
 .current-city__header
     display: flex
     justify-content: space-around
     align-content: center
 
 .temperature_big
-    font-size: 5.9em
+    font-size: 5.128em
 
 .form
     grid-column: 3
@@ -74,7 +94,7 @@ h2
     height: 40px
     border: none
     border-radius: 5px
-    background-color: #eee
+    background-color: #ddd
     font-size: 1.5em
     display: block
 
@@ -87,32 +107,54 @@ h2
     justify-content: space-between
 
 .temperature_small
-    font-size: 1.5em
+    font-size: 1.8em
 
 .button_circle
     border: 0px
     border-radius: 20px
     width: 40px
     height: 40px
-    background-color: #555
-    &:hover
-        background-color: #333
 
 .city-name
-    font-size: 1.5em
-    margin: auto 10px
+    font-size: 1.8em
+    text-align: center
 
 .button
     cursor: pointer
     outline: none
+    background-color: #777
+    color: #eee
+    font-weight: 400
+    &:hover
+        background: linear-gradient(90deg, #92fe9d, #00c9ff)
 
-@media screen and (max-width: 640px)
+.card
+    background: #eee
+    padding: 15px
+    border-radius: 15px
+
+.text-hidden
+    display: none
+
+.weather-badge
+    width: 50px
+    height: 50px
+    &_big
+        width: 100px
+        height: 100px
+
+@media screen and (max-width: 767px)
     .weather-current-place, .favorites
         grid-template-columns: 1fr
 
     .header
         grid-template-columns: 1fr 50px
         grid-gap: 1em 0em
+
+    .favorites
+        & > .header
+            h2
+                grid-column: span 2
 
     .form__input
         width: calc(100% - 40px)
@@ -121,7 +163,7 @@ h2
         grid-column: 1 / 3
 
     .header__button-update
-        background: url(./img/reload_s.png) 50% 50% no-repeat
+        background: url(/img/reload_s.png) 50% 50% no-repeat
         background-size: 70%
         width: 40px
         height: 40px
@@ -130,5 +172,8 @@ h2
         background-color: #bbb
         margin: auto
 
-    .text_hidden
+    .text-hidden_mobile
         display: none
+
+    body
+        padding: 1em

@@ -5,51 +5,48 @@
 
 body {
   font-family: "Montserrat", sans-serif;
+  padding: 2em;
+  background: #00c9ff;
+  background: -webkit-gradient(linear, left top, right top, from(#92fe9d), to(#00c9ff));
+  background: linear-gradient(to right, #92fe9d, #00c9ff);
 }
 
 .wrapper {
   margin: auto;
-  max-width: 960px;
-  padding: 10px;
+  max-width: 990px;
 }
 
 .weather-current-place {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr) [2];
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 2em 4em;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2em 2em;
   margin-bottom: 2em;
 }
 
 .favorites {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr) [2];
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 2em 4em;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2em 2em;
 }
 
 .header {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr) [3];
-  grid-template-columns: repeat(3, 1fr);
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
   grid-column: 1 / -1;
 }
 
 .header__button-update {
   -ms-grid-column: 2;
   grid-column: 2;
-  border-radius: 5px;
+  border-radius: 25px;
   border: none;
-  background-color: #ddd;
-  color: #444;
   font-size: 1em;
-}
-
-.header__button-update:hover {
-  background-color: #aaa;
 }
 
 .city-info {
@@ -57,18 +54,56 @@ body {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .city-info__item {
   list-style-type: none;
-  background-color: #aaa;
-  padding: 5px;
+  background: -webkit-gradient(linear, left top, right top, from(#92fe9d), to(#00c9ff));
+  background: linear-gradient(90deg, #92fe9d, #00c9ff);
+  padding: 7px 10px;
   margin: 5px 0px;
-  display: block;
   -ms-flex-preferred-size: 100%;
-  flex-basis: 100%;
+      flex-basis: 100%;
   font-weight: 600;
+  min-height: 20px;
+  border-radius: 8px;
+}
+
+.skeleton {
+  background: -webkit-gradient(linear, left top, right top, from(#888), to(#ccc));
+  background: linear-gradient(90deg, #888, #ccc);
+  background-size: 200% 200%;
+  -webkit-animation: AnimationName 2s ease infinite;
+          animation: AnimationName 2s ease infinite;
+}
+
+.grey {
+  color: #555;
+}
+
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes AnimationName {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 h2 {
@@ -80,18 +115,30 @@ h2 {
   font-weight: 400;
 }
 
+.current-city {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
 .current-city__header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: distribute;
-  justify-content: space-around;
+      justify-content: space-around;
   -ms-flex-line-pack: center;
-  align-content: center;
+      align-content: center;
 }
 
 .temperature_big {
-  font-size: 5.9em;
+  font-size: 5.128em;
 }
 
 .form {
@@ -101,18 +148,18 @@ h2 {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 .form__input {
   height: 40px;
   border: none;
   border-radius: 5px;
-  background-color: #eee;
+  background-color: #ddd;
   font-size: 1.5em;
   display: block;
 }
@@ -126,15 +173,15 @@ h2 {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .temperature_small {
-  font-size: 1.5em;
+  font-size: 1.8em;
 }
 
 .button_circle {
@@ -142,33 +189,58 @@ h2 {
   border-radius: 20px;
   width: 40px;
   height: 40px;
-  background-color: #555;
-}
-
-.button_circle:hover {
-  background-color: #333;
 }
 
 .city-name {
-  font-size: 1.5em;
-  margin: auto 10px;
+  font-size: 1.8em;
+  text-align: center;
 }
 
 .button {
   cursor: pointer;
   outline: none;
+  background-color: #777;
+  color: #eee;
+  font-weight: 400;
 }
 
-@media screen and (max-width: 640px) {
-  .weather-current-place,
-  .favorites {
+.button:hover {
+  background: -webkit-gradient(linear, left top, right top, from(#92fe9d), to(#00c9ff));
+  background: linear-gradient(90deg, #92fe9d, #00c9ff);
+}
+
+.card {
+  background: #eee;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.text-hidden {
+  display: none;
+}
+
+.weather-badge {
+  width: 50px;
+  height: 50px;
+}
+
+.weather-badge_big {
+  width: 100px;
+  height: 100px;
+}
+
+@media screen and (max-width: 767px) {
+  .weather-current-place, .favorites {
     -ms-grid-columns: 1fr;
-    grid-template-columns: 1fr;
+        grid-template-columns: 1fr;
   }
   .header {
     -ms-grid-columns: 1fr 50px;
-    grid-template-columns: 1fr 50px;
+        grid-template-columns: 1fr 50px;
     grid-gap: 1em 0em;
+  }
+  .favorites > .header h2 {
+    grid-column: span 2;
   }
   .form__input {
     width: calc(100% - 40px);
@@ -179,7 +251,7 @@ h2 {
     grid-column: 1 / 3;
   }
   .header__button-update {
-    background: url(./img/reload_s.png) 50% 50% no-repeat;
+    background: url(/img/reload_s.png) 50% 50% no-repeat;
     background-size: 70%;
     width: 40px;
     height: 40px;
@@ -188,8 +260,11 @@ h2 {
     background-color: #bbb;
     margin: auto;
   }
-  .text_hidden {
+  .text-hidden_mobile {
     display: none;
+  }
+  body {
+    padding: 1em;
   }
 }
 /*# sourceMappingURL=style.css.map */

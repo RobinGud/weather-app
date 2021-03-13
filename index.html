@@ -16,49 +16,52 @@
   <body>
     <div class="wrapper">
       <header class="weather-current-place" id="current">
-        <div class="header">
+        <div class="header card">
           <h2 class="title">Погода здесь</h2>
           <button
             class="button header__button-update"
             onclick="getCurrentPosition()"
           >
-            <span class="text_hidden">Обновить геолокацию</span>
+            <span class="text-hidden_mobile">Обновить геолокацию</span>
           </button>
         </div>
-        <div class="current-city">
-          <h3 class="city-name">Saint Petersburg</h3>
+        <div class="current-city card">
+          <h3 class="city-name grey">City</h3>
           <div class="current-city__header">
             <img
-              class="weather_badge weather_badge_big"
-              src="./img/sunny-and-cloud-m.png"
+              class="weather-badge weather-badge_big"
+              src="./img/13d.png"
               alt=""
             />
-            <span class="temperature_big temperature">8°C</span>
+            <span class="temperature_big temperature grey">8°C</span>
           </div>
         </div>
-        <ul class="city-info">
-          <li class="city-info__item">
-            Ветер<span class="city-info__value wind">
-              Moderate breeze, 6.0m/s, North-northwest</span
-            >
+        <ul class="city-info card">
+          <li class="city-info__item skeleton">
+            <span class="text-hidden">Ветер</span>
+            <span class="city-info__value wind text-hidden"></span>
           </li>
-          <li class="city-info__item">
-            Облачность<span class="city-info__value cloud">Broken clouds</span>
+          <li class="city-info__item skeleton">
+            <span class="text-hidden">Облачность</span>
+            <span class="city-info__value cloud text-hidden"></span>
           </li>
-          <li class="city-info__item">
-            Давление<span class="city-info__value pressure">1013 hpa</span>
+          <li class="city-info__item skeleton">
+            <span class="text-hidden">Давление</span>
+            <span class="city-info__value pressure text-hidden"></span>
           </li>
-          <li class="city-info__item">
-            Влажность<span class="city-info__value humidity">52 %</span>
+          <li class="city-info__item skeleton">
+            <span class="text-hidden">Влажность</span>
+            <span class="city-info__value humidity text-hidden"></span>
           </li>
-          <li class="city-info__item">
-            Координаты<span class="city-info__value coord">[59.88, 30.42]</span>
+          <li class="city-info__item skeleton">
+            <span class="text-hidden">Координаты</span>
+            <span class="city-info__value coord text-hidden"></span>
           </li>
         </ul>
       </header>
 
       <article class="favorites">
-        <div class="header">
+        <div class="header card">
           <h2 class="title">Избранное</h2>
           <form class="form" name="addCityForm">
             <input
@@ -79,6 +82,8 @@
         </div>
       </article>
     </div>
+
+    <h3 class="city-name"></h3>
 
     <script type="text/javascript" src="./js/test.js"></script>
   </body>
