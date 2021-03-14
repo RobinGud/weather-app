@@ -19,7 +19,7 @@ try {
     }
   }
     fs.writeFileSync('../json/cities.json', JSON.stringify(newJson))
-  console.log("Файл успешно записан! " + count + " Объектов")
+  console.log(`Файл успешно записан! ${count} Объектов`)
 } catch (err) {
   return console.error(err)
 }
