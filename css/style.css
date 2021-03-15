@@ -1,12 +1,11 @@
 * {
   padding: 0;
   margin: 0;
+  font-family: "Montserrat", sans-serif;
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
   padding: 2em;
-  background: #00c9ff;
   background: -webkit-gradient(linear, left top, right top, from(#92fe9d), to(#00c9ff));
   background: linear-gradient(to right, #92fe9d, #00c9ff);
 }
@@ -41,6 +40,23 @@ body {
   grid-column: 1 / -1;
 }
 
+.city-name {
+  font-size: 1.8em;
+  text-align: center;
+}
+
+.city-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 .city-info {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -67,16 +83,39 @@ body {
   font-weight: 400;
 }
 
+.city-current {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.city-current__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
 .skeleton {
-  background: -webkit-gradient(linear, left top, right top, from(#888), to(#ccc));
-  background: linear-gradient(90deg, #888, #ccc);
+  background: -webkit-gradient(linear, left top, right top, from(#8A9BA8), to(#CED9E0));
+  background: linear-gradient(90deg, #8A9BA8, #CED9E0);
   background-size: 200% 200%;
   -webkit-animation: AnimationLoading 2s ease infinite;
           animation: AnimationLoading 2s ease infinite;
 }
 
 .grey {
-  color: #555;
+  color: #8A9BA8;
+  fill: #8A9BA8;
 }
 
 @-webkit-keyframes AnimationLoading {
@@ -107,30 +146,12 @@ h2 {
   font-size: 2.3em;
 }
 
-.current-city {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-}
-
-.current-city__header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -ms-flex-line-pack: center;
-      align-content: center;
-}
-
 .temperature_big {
   font-size: 5.128em;
+}
+
+.temperature_small {
+  font-size: 1.8em;
 }
 
 .form {
@@ -151,37 +172,16 @@ h2 {
   height: 40px;
   border: none;
   border-radius: 5px;
-  background-color: #ddd;
+  background-color: #d3dce3;
   font-size: 1.5em;
   display: block;
-}
-
-.city-header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-}
-
-.temperature_small {
-  font-size: 1.8em;
-}
-
-.city-name {
-  font-size: 1.8em;
-  text-align: center;
 }
 
 .button {
   cursor: pointer;
   outline: none;
-  background-color: #777;
-  color: #eee;
+  background-color: #738694;
+  color: #E1E8ED;
   font-weight: 400;
 }
 
@@ -196,6 +196,8 @@ h2 {
   border-radius: 25px;
   border: none;
   font-size: 1em;
+  width: 250px;
+  margin: 0 auto;
 }
 
 .button__add {
@@ -210,7 +212,7 @@ h2 {
 }
 
 .card {
-  background: #eee;
+  background: #E1E8ED;
   padding: 15px;
   border-radius: 15px;
 }
@@ -236,22 +238,31 @@ h2 {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
   }
+  .city-header {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .city-header h4 {
+    -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+  }
   .header {
     -ms-grid-columns: 1fr 50px;
         grid-template-columns: 1fr 50px;
     grid-gap: 1em 0em;
   }
-  .header__button-update {
-    background: url(/img/reload_s.png) 50% 50% no-repeat;
+  .header .button-update {
+    background-image: url(/img/reload_s.png);
+    background-position: 50%;
     background-size: 70%;
+    background-repeat: no-repeat;
     width: 40px;
     height: 40px;
     border: 0px;
     border-radius: 20px;
-    background-color: #bbb;
     margin: auto;
   }
-  .favorites > .header h2 {
+  .favorites .header h2 {
     grid-column: span 2;
   }
   .form {

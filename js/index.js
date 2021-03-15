@@ -95,7 +95,7 @@ const createFavoriteCityCard = (countCityCard) => {
     <span class="temperature_small temperature grey">5°C</span>
     <img
       class="weather-badge"
-      src="/img/13d.png"
+      src="/img/thermometer.svg"
       alt=""
     />
     <button class="button button_circle" onclick="delFavoriteCity(${countCityCard})">
