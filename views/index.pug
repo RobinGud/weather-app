@@ -1,0 +1,50 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='icon' href='favicon.ico' type='image/x-icon')
+    link(rel='stylesheet' href='/css/style.css')
+    link(rel='preconnect' href='https://fonts.gstatic.com')
+    link(href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap' rel='stylesheet')
+    title Weather landing
+  body
+    .wrapper
+      header#current.weather-current-place
+        .header.card
+          h2.title Погода здесь
+          button.button.button-update(onclick='getCurrentPosition()')
+            span.text-hidden_mobile Обновить геолокацию
+        .city-current.card
+          h3.city-name.grey City
+          .city-current__header
+            img.weather-badge.weather-badge_big(src='/img/thermometer.svg' alt='')
+            span.temperature_big.temperature.grey 8°C
+        ul.city-info.card
+          li.city-info__item.skeleton
+            span.text-hidden Ветер
+            span.city-info__value.wind.text-hidden
+          li.city-info__item.skeleton
+            span.text-hidden Облачность
+            span.city-info__value.cloud.text-hidden
+          li.city-info__item.skeleton
+            span.text-hidden Давление
+            span.city-info__value.pressure.text-hidden
+          li.city-info__item.skeleton
+            span.text-hidden Влажность
+            span.city-info__value.humidity.text-hidden
+          li.city-info__item.skeleton
+            span.text-hidden Координаты
+            span.city-info__value.coord.text-hidden
+      article.favorites
+        .header.card
+          h2.title Избранное
+          form.form(name='addCityForm')
+            input.input.form__input(list='cities-list' type='text' name='cityName')
+            datalist#cities-list
+              each city in cities
+                option(value=`${city.name}`)
+            button.button.button_circle.button__add(type='button' onclick='addFavoriteCity()')
+              img(src='./img/add.svg' alt='+')
+    script(type='text/javascript' src='./js/index.js')
