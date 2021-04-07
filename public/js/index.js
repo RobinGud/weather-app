@@ -17,23 +17,24 @@ const getCurrentPosition = () => {
 }
 
 const reqAPI = (name, coords, id) => {
-  let url = 'https://community-open-weather-map.p.rapidapi.com/weather?'
+  let url = 'http://localhost:3000/weather/'
   if (name) {
-    url += `q=${name}`
+    url += `city?q=${name}`
   }
   else {
-    url += `lat=${coords.latitude}&lon=${coords.longitude}`
+    url += `coordinates?lat=${coords.latitude}&lon=${coords.longitude}`
   }
 
   fetch(url, {
     "method": "GET",
     "headers": {
-      "x-rapidapi-key": "cadf04a247msh09c8c1c6bee7505p1a566ajsn5c1a379faca1",
-      "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com"
+      // "x-rapidapi-key": "cadf04a247msh09c8c1c6bee7505p1a566ajsn5c1a379faca1",
+      // "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com"
     },
   })
     .then(res => { return res.text() })
     .then(body => {
+      console.log(body)
       updateHtmlData(JSON.parse(body), id)
     })
     .catch(err => {
@@ -99,7 +100,7 @@ const createFavoriteCityCard = (countCityCard) => {
       alt=""
     />
     <button class="button button_circle" onclick="delFavoriteCity(${countCityCard})">
-      <img src="./img/remove.svg" alt="x" />
+      <img src="/img/remove.svg" alt="x" />
     </button>
   </div>
   <ul class="city-info" class="city-info">
