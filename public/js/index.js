@@ -70,8 +70,12 @@ const numToStringCloud = (num) => {
 
 const delFavoriteCity = (id) => {
   let el = document.getElementById(favCityPrefix + id)
-  localStorage.removeItem(id);
-  el.remove()
+  // localStorage.removeItem(id);
+  fetch(`${window.location.href}favourites?id=${id}`, {
+    "method": "DELETE",
+  }).then(() => {
+    el.remove()
+  })
 }
 
 const addFavoriteCity = () => {
@@ -79,12 +83,28 @@ const addFavoriteCity = () => {
   let сityId = (cities.find(item => (item.name == cityName)).id)
   addCityForm.cityName.value = ""
 
-  if (localStorage.getItem(сityId)) return
+  // if (localStorage.getItem(сityId)) return
 
-  localStorage.setItem(сityId, cityName)
+  // localStorage.setItem(сityId, cityName)
   createFavoriteCityCard(сityId)
-  reqAPI(cityName, undefined, (favCityPrefix + сityId))
+
+  fetch(`${window.location.href}favourites?name=${cityName}`, {
+    "method": "POST",
+  })
+  .then((res) => { 
+    // console.log(res)
+    return res.text() 
+  })
+  .then((body) => {
+    console.log(body)
+    reqAPI(cityName, undefined, (favCityPrefix + сityId))
+    updateHtmlData(JSON.parse(body), id)
+  })
+
+
 }
+
+
 
 const createFavoriteCityCard = (countCityCard) => {
 
@@ -132,27 +152,44 @@ const createFavoriteCityCard = (countCityCard) => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  let keys = Object.keys(localStorage)
 
-  keys.forEach(cityId => {
-    createFavoriteCityCard(cityId);
-    reqAPI(localStorage.getItem(cityId), undefined, (favCityPrefix + cityId))
+  fetch(`${window.location.href}favourites`, {
+    "method": "GET",
+  })
+  .then((res) => {
+    return res.text() 
+  })
+  .then((keys) => {
+  console.log(keys)
+  JSON.parse(keys).forEach(city => {
+    createFavoriteCityCard(city.id);
+    reqAPI(city.name, undefined, (favCityPrefix + city.id))
+  })
   })
 
-  // fetch("/json/cities.json", {
-  //   "method": "GET"
-  // })
-  //   .then(res => { return res.text() })
-  //   .then(body => {
-  //     cities = JSON.parse(body)
-  //     let parent = document.getElementById("cities-list")
-  //     cities.forEach((cityName) => {
-  //       parent.insertAdjacentHTML("beforeEnd", `<option value="${cityName.name}"/>`)
 
-  //     })
-  //   })
-  //   .catch(err => {
-  //     console.error(err);
-  //   });
+  // let keys = Object.keys(localStorage)
+
+  // keys.forEach(cityId => {
+  //   createFavoriteCityCard(cityId);
+  //   reqAPI(localStorage.getItem(cityId), undefined, (favCityPrefix + cityId))
+  // })
+
+  fetch("/json/cities.json", {
+    "method": "GET"
+  })
+    .then(res => { return res.text() })
+    .then(body => {
+      cities = JSON.parse(body)
+      // console.log(cities)
+      // let parent = document.getElementById("cities-list")
+      // cities.forEach((cityName) => {
+      //   parent.insertAdjacentHTML("beforeEnd", `<option value="${cityName.name}"/>`)
+
+      // })
+    })
+    .catch(err => {
+      console.error(err);
+    });
 
 });
