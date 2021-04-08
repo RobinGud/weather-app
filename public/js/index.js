@@ -17,7 +17,7 @@ const getCurrentPosition = () => {
 }
 
 const reqAPI = (name, coords, id) => {
-  let url = 'http://localhost:3000/weather/'
+  let url = `${window.location.href}weather/`
   if (name) {
     url += `city?q=${name}`
   }
@@ -139,20 +139,20 @@ document.addEventListener("DOMContentLoaded", () => {
     reqAPI(localStorage.getItem(cityId), undefined, (favCityPrefix + cityId))
   })
 
-  fetch("/json/cities.json", {
-    "method": "GET"
-  })
-    .then(res => { return res.text() })
-    .then(body => {
-      cities = JSON.parse(body)
-      let parent = document.getElementById("cities-list")
-      cities.forEach((cityName) => {
-        parent.insertAdjacentHTML("beforeEnd", `<option value="${cityName.name}"/>`)
+  // fetch("/json/cities.json", {
+  //   "method": "GET"
+  // })
+  //   .then(res => { return res.text() })
+  //   .then(body => {
+  //     cities = JSON.parse(body)
+  //     let parent = document.getElementById("cities-list")
+  //     cities.forEach((cityName) => {
+  //       parent.insertAdjacentHTML("beforeEnd", `<option value="${cityName.name}"/>`)
 
-      })
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  //     })
+  //   })
+  //   .catch(err => {
+  //     console.error(err);
+  //   });
 
 });

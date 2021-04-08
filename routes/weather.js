@@ -25,17 +25,17 @@ router.get('/coordinates', (req, res, next) => {
         .then( cityData => {
             res.send(cityData)
         })
-        .catch(
-            res.status(520).send({"msg": "Unknown error"})
-        )
+        // .catch(
+        //     res.status(520).send({"msg": "Unknown error"})
+        // )
     }
     else {
-        res.status(400).send({"msg": "Must be provided query or geo coords (lat and lon)"})
+        res.status(400).send({"msg": "Must be provided lat and lon"})
     }
 })
 
-router.post('/city/:id', (req, res, next) => {
-    console.log(req.params)
-})
+// router.post('/city/:id', (req, res, next) => {
+//     console.log(req.params)
+// })
 
 module.exports = router
