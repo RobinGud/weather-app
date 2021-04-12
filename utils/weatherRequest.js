@@ -2,11 +2,11 @@ const fetch = require('node-fetch')
 
 const url = 'https://community-open-weather-map.p.rapidapi.com/weather?'
 
-const getWeatherByCityName = (city) => {
+exports.getWeatherByCityName = (city) => {
     return weatherRequest(`${url}q=${city}`)
 }
 
-const getWeatherByGeoCoords = (lat, lon) => {
+exports.getWeatherByGeoCoords = (lat, lon) => {
     return weatherRequest(`${url}lat=${lat}&lon=${lon}`);
 }
 
@@ -22,8 +22,6 @@ const parseRequest = (data) => {
   "humidity" : `${data.main.humidity} %`,
   "coord" : `[${data.coord.lat}, ${data.coord.lon}]`,
   }
-
-  console.log(obj)
 }
 
 const degToCompass = (deg) => {
@@ -49,18 +47,11 @@ const weatherRequest = async (url) => {
     })
       .then(res => { return res.text() })
       .then(body => {
-          // console.log(JSON.parse(body), "1")
           return JSON.parse(body)
-          // updateHtmlData(JSON.parse(body), id)
         })
         .catch(err => {
           console.error(err);
         });
         
         return res
-  }
-
-  module.exports = {
-    getWeatherByCityName: getWeatherByCityName,
-    getWeatherByGeoCoords: getWeatherByGeoCoords
   }
