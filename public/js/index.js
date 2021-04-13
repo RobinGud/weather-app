@@ -7,7 +7,7 @@ const getCurrentPosition = () => {
   })
 
   function success({ coords }) {
-    reqAPI(undefined, coords, undefined)
+    reqAPI(undefined, coords)
   }
 
   function error({ message }) {
@@ -16,50 +16,34 @@ const getCurrentPosition = () => {
 
 }
 
-const reqAPI = (name, coords, id) => {
+const reqAPI = (name, coords) => {
+  let currentPlace = false
   let url = `${window.location.href}weather/`
   if (name) {
     url += `city?q=${name}`
   }
   else {
     url += `coordinates?lat=${coords.latitude}&lon=${coords.longitude}`
+    currentPlace = true
+
   }
 
   fetch(url, {
     "method": "GET",
     "headers": {
-      // "x-rapidapi-key": "cadf04a247msh09c8c1c6bee7505p1a566ajsn5c1a379faca1",
-      // "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com"
     },
   })
     .then(res => { return res.text() })
     .then(body => {
-      console.log(body)
-      updateHtmlData(JSON.parse(body), id)
+      updateHtmlData(JSON.parse(body), currentPlace)
     })
     .catch(err => {
       console.error(err);
     });
 }
 
-// const updateHtmlData = (data, id = "current") => {
-//   let cityCard = document.getElementById(id);
-//   cityCard.querySelector('.city-name').innerHTML = data.name
-//   cityCard.querySelector('.temperature').innerHTML = `${Math.round(data.main.temp - 273)}°C`
-//   cityCard.querySelector('.weather-badge').src = `/img/${data.weather[0].icon.slice(0, 2)}d.png`
-//   cityCard.querySelector('.wind').innerHTML = `${data.wind.speed} m/s, ${degToCompass(data.wind.deg)}`
-//   cityCard.querySelector('.cloud').innerHTML = numToStringCloud(data.clouds.all)
-//   cityCard.querySelector('.pressure').innerHTML = `${data.main.pressure} hpa`
-//   cityCard.querySelector('.humidity').innerHTML = `${data.main.humidity} %`
-//   cityCard.querySelector('.coord').innerHTML = `[${data.coord.lat}, ${data.coord.lon}]`
-//   cityCard.querySelectorAll('.text-hidden').forEach(el => el.classList.remove("text-hidden"))
-//   cityCard.querySelectorAll('.skeleton').forEach(el => el.classList.remove("skeleton"))
-//   cityCard.querySelectorAll('.grey').forEach(el => el.classList.remove("grey"))
-// }
-
-const updateHtmlData = (data, id = "current") => {
-  console.log(data)
-  let cityCard = document.getElementById(id);
+const updateHtmlData = (data, сurrentPlace) => {
+  let cityCard= document.querySelector(сurrentPlace ? "#current" : ".temp");
   cityCard.querySelector('.city-name').innerHTML = data.name
   cityCard.querySelector('.temperature').innerHTML = data.temp
   cityCard.querySelector('.weather-badge').src = data.img
@@ -67,26 +51,20 @@ const updateHtmlData = (data, id = "current") => {
   cityCard.querySelector('.cloud').innerHTML = data.cloud
   cityCard.querySelector('.pressure').innerHTML = data.pressure
   cityCard.querySelector('.humidity').innerHTML = data.humidity
-  cityCard.querySelector('.coord').innerHTML = data.coords
+  cityCard.querySelector('.coord').innerHTML = data.coord
   cityCard.querySelectorAll('.text-hidden').forEach(el => el.classList.remove("text-hidden"))
   cityCard.querySelectorAll('.skeleton').forEach(el => el.classList.remove("skeleton"))
   cityCard.querySelectorAll('.grey').forEach(el => el.classList.remove("grey"))
+
+  if (!сurrentPlace) {
+  cityCard.id = favCityPrefix + data.id
+  cityCard.classList.remove("temp")
+  cityCard.querySelector(".button_del").setAttribute("onclick", `delFavoriteCity("${data.id}")`);
+  }
 }
-
-// function degToCompass(deg) {
-//   var val = Math.floor((deg / 22.5) + 0.5);
-//   var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
-//   return arr[(val % 16)];
-// }
-
-// const numToStringCloud = (num) => {
-//   arr = ['Ясно', 'Рассеянные облака', 'Рассеянные облака', 'Рассеянные облака', 'Отдельные облака', 'Отдельные облака', 'Разорванные облака', 'Разорванные облака', 'Разорванные облака', 'Разорванные облака', 'Сплошные облака']
-//   return arr[Math.round(num / 10)]
-// }
 
 const delFavoriteCity = (id) => {
   let el = document.getElementById(favCityPrefix + id)
-  // localStorage.removeItem(id);
   fetch(`${window.location.href}favourites?id=${id}`, {
     "method": "DELETE",
   }).then(() => {
@@ -96,26 +74,18 @@ const delFavoriteCity = (id) => {
 
 const addFavoriteCity = () => {
   let cityName = addCityForm.cityName.value
-  // let сityId = (cities.find(item => (item.name == cityName)).id)
-  let сityId = (cities.find(item => (item.name == cityName)).id)
   addCityForm.cityName.value = ""
 
-  // if (localStorage.getItem(сityId)) return
-
-  // localStorage.setItem(сityId, cityName)
-  createFavoriteCityCard(сityId)
+  createFavoriteCityCard()
 
   fetch(`${window.location.href}favourites?name=${cityName}`, {
     "method": "POST",
   })
   .then((res) => { 
-    // console.log(res)
     return res.text() 
   })
-  .then((body) => {
-    console.log(body)
-    reqAPI(cityName, undefined, (favCityPrefix + сityId))
-    updateHtmlData(JSON.parse(body), id)
+  .then(() => {
+    reqAPI(cityName, undefined)
   })
 
 
@@ -123,11 +93,11 @@ const addFavoriteCity = () => {
 
 
 
-const createFavoriteCityCard = (countCityCard) => {
+const createFavoriteCityCard = () => {
 
   let parent = document.querySelector('.favorites')
 
-  let cityCard = `<div class="weather-city card" id="${favCityPrefix + countCityCard}">
+  let cityCard = `<div class="weather-city card temp">
   <div class="city-header">
     <h4 class="city-name grey">City</h4>
     <span class="temperature_small temperature grey">5°C</span>
@@ -136,7 +106,7 @@ const createFavoriteCityCard = (countCityCard) => {
       src="/img/thermometer.svg"
       alt=""
     />
-    <button class="button button_circle" onclick="delFavoriteCity(${countCityCard})">
+    <button class="button button_circle button_del">
       <img src="/img/remove.svg" alt="x" />
     </button>
   </div>
@@ -177,36 +147,9 @@ document.addEventListener("DOMContentLoaded", () => {
     return res.text() 
   })
   .then((keys) => {
-  console.log(keys)
   JSON.parse(keys).forEach(city => {
     createFavoriteCityCard(city.id);
     reqAPI(city.name, undefined, (favCityPrefix + city.id))
   })
   })
-
-
-  // let keys = Object.keys(localStorage)
-
-  // keys.forEach(cityId => {
-  //   createFavoriteCityCard(cityId);
-  //   reqAPI(localStorage.getItem(cityId), undefined, (favCityPrefix + cityId))
-  // })
-
-  // fetch("/json/cities.json", {
-  //   "method": "GET"
-  // })
-  //   .then(res => { return res.text() })
-  //   .then(body => {
-  //     cities = JSON.parse(body)
-  //     // console.log(cities)
-  //     // let parent = document.getElementById("cities-list")
-  //     // cities.forEach((cityName) => {
-  //     //   parent.insertAdjacentHTML("beforeEnd", `<option value="${cityName.name}"/>`)
-
-  //     // })
-  //   })
-  //   .catch(err => {
-  //     console.error(err);
-  //   });
-
 });

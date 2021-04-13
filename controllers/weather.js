@@ -5,15 +5,12 @@ exports.getWeatherByName = async (req, res, next) => {
     let name = req.query.q
     if (name) {
         let weatherCache = WeatherCityCollection.getWeatherByName(name)
-        console.log(weatherCache)
         if(weatherCache) {
-            console.log("🚀 ~ file: weather.js ~ line 9 ~ exports.getWeatherByName= ~ weatherCache", weatherCache)
             res.send(weatherCache)
         } 
         else {
         await weatherReq.getWeatherByCityName(name)
         .then( cityData => {
-        console.log("🚀 ~ file: weather.js ~ line 15 ~ exports.getWeatherByName= ~ cityData", cityData)
             WeatherCityCollection.addWeather(cityData)
             res.send(cityData)
         })

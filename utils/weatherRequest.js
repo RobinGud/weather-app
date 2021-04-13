@@ -11,7 +11,6 @@ exports.getWeatherByGeoCoords = (lat, lon) => {
 }
 
 const parseRequest = (data) => {
-  // console.log(data)
   let obj = {
     "id": data.id,
   "name" : data.name,
@@ -23,7 +22,6 @@ const parseRequest = (data) => {
   "humidity" : `${data.main.humidity} %`,
   "coord" : `[${data.coord.lat}, ${data.coord.lon}]`,
   }
-  console.log(obj)
   return obj
 }
 
@@ -59,6 +57,3 @@ const weatherRequest = async (url) => {
         
         return res
   }
-
-  
-  // getWeatherByCityName("Dubrovka")

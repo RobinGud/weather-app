@@ -11,21 +11,20 @@ exports.getAllFavouritesCities = async (req, res, next) => {
         })
         res.send(citiesArray)
     } catch (error) {
-        console.log(error)
+        console.error(error)
         res.status(400).send(error.message)
     }
 }
 
 exports.postAddFavourites = async (req, res, next) => {
     let name = req.query.name
-    let id = CitiesCollection.findCityByName(name)
-    console.log(id, name)
-    if (id) {
+    let city = CitiesCollection.findCityByName(name)
+    if (city) {
         try {
-            await firestore.collection('cities').doc(id.toString()).set({ name: name })
+            await firestore.collection('cities').doc(city.id.toString()).set({ name: city.name })
             res.send('Record')
         } catch (error) {
-            console.log(error)
+            console.error(error)
             res.status(400).send(error.message)
         }
     }
@@ -41,7 +40,7 @@ exports.deleteFavouritesCity = async (req, res, next) => {
             await firestore.collection('cities').doc(id.toString()).delete()
             res.send("Success delete")
         } catch (error) {
-            console.log(error)
+            console.error(error)
             res.status(400).send(error.message)
         }
     }
@@ -60,7 +59,7 @@ exports.getCity = async (req, res, next) => {
             res.status(500).send("City is undefined")
         }
     } catch (error) {
-        console.log(error)
+        console.error(error)
         res.status(400).send(error.message)
     }
 }
