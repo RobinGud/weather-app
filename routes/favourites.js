@@ -8,4 +8,6 @@ router.post('/', FavouritesController.postAddFavourites)
 
 router.delete('/', FavouritesController.deleteFavouritesCity)
 
+router.get('/city', FavouritesController.getCity)
+
 module.exports = router

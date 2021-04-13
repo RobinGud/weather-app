@@ -42,31 +42,47 @@ const reqAPI = (name, coords, id) => {
     });
 }
 
+// const updateHtmlData = (data, id = "current") => {
+//   let cityCard = document.getElementById(id);
+//   cityCard.querySelector('.city-name').innerHTML = data.name
+//   cityCard.querySelector('.temperature').innerHTML = `${Math.round(data.main.temp - 273)}°C`
+//   cityCard.querySelector('.weather-badge').src = `/img/${data.weather[0].icon.slice(0, 2)}d.png`
+//   cityCard.querySelector('.wind').innerHTML = `${data.wind.speed} m/s, ${degToCompass(data.wind.deg)}`
+//   cityCard.querySelector('.cloud').innerHTML = numToStringCloud(data.clouds.all)
+//   cityCard.querySelector('.pressure').innerHTML = `${data.main.pressure} hpa`
+//   cityCard.querySelector('.humidity').innerHTML = `${data.main.humidity} %`
+//   cityCard.querySelector('.coord').innerHTML = `[${data.coord.lat}, ${data.coord.lon}]`
+//   cityCard.querySelectorAll('.text-hidden').forEach(el => el.classList.remove("text-hidden"))
+//   cityCard.querySelectorAll('.skeleton').forEach(el => el.classList.remove("skeleton"))
+//   cityCard.querySelectorAll('.grey').forEach(el => el.classList.remove("grey"))
+// }
+
 const updateHtmlData = (data, id = "current") => {
+  console.log(data)
   let cityCard = document.getElementById(id);
   cityCard.querySelector('.city-name').innerHTML = data.name
-  cityCard.querySelector('.temperature').innerHTML = `${Math.round(data.main.temp - 273)}°C`
-  cityCard.querySelector('.weather-badge').src = `/img/${data.weather[0].icon.slice(0, 2)}d.png`
-  cityCard.querySelector('.wind').innerHTML = `${data.wind.speed} m/s, ${degToCompass(data.wind.deg)}`
-  cityCard.querySelector('.cloud').innerHTML = numToStringCloud(data.clouds.all)
-  cityCard.querySelector('.pressure').innerHTML = `${data.main.pressure} hpa`
-  cityCard.querySelector('.humidity').innerHTML = `${data.main.humidity} %`
-  cityCard.querySelector('.coord').innerHTML = `[${data.coord.lat}, ${data.coord.lon}]`
+  cityCard.querySelector('.temperature').innerHTML = data.temp
+  cityCard.querySelector('.weather-badge').src = data.img
+  cityCard.querySelector('.wind').innerHTML = data.wind
+  cityCard.querySelector('.cloud').innerHTML = data.cloud
+  cityCard.querySelector('.pressure').innerHTML = data.pressure
+  cityCard.querySelector('.humidity').innerHTML = data.humidity
+  cityCard.querySelector('.coord').innerHTML = data.coords
   cityCard.querySelectorAll('.text-hidden').forEach(el => el.classList.remove("text-hidden"))
   cityCard.querySelectorAll('.skeleton').forEach(el => el.classList.remove("skeleton"))
   cityCard.querySelectorAll('.grey').forEach(el => el.classList.remove("grey"))
 }
 
-function degToCompass(deg) {
-  var val = Math.floor((deg / 22.5) + 0.5);
-  var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
-  return arr[(val % 16)];
-}
+// function degToCompass(deg) {
+//   var val = Math.floor((deg / 22.5) + 0.5);
+//   var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+//   return arr[(val % 16)];
+// }
 
-const numToStringCloud = (num) => {
-  arr = ['Ясно', 'Рассеянные облака', 'Рассеянные облака', 'Рассеянные облака', 'Отдельные облака', 'Отдельные облака', 'Разорванные облака', 'Разорванные облака', 'Разорванные облака', 'Разорванные облака', 'Сплошные облака']
-  return arr[Math.round(num / 10)]
-}
+// const numToStringCloud = (num) => {
+//   arr = ['Ясно', 'Рассеянные облака', 'Рассеянные облака', 'Рассеянные облака', 'Отдельные облака', 'Отдельные облака', 'Разорванные облака', 'Разорванные облака', 'Разорванные облака', 'Разорванные облака', 'Сплошные облака']
+//   return arr[Math.round(num / 10)]
+// }
 
 const delFavoriteCity = (id) => {
   let el = document.getElementById(favCityPrefix + id)
@@ -80,6 +96,7 @@ const delFavoriteCity = (id) => {
 
 const addFavoriteCity = () => {
   let cityName = addCityForm.cityName.value
+  // let сityId = (cities.find(item => (item.name == cityName)).id)
   let сityId = (cities.find(item => (item.name == cityName)).id)
   addCityForm.cityName.value = ""
 
@@ -175,21 +192,21 @@ document.addEventListener("DOMContentLoaded", () => {
   //   reqAPI(localStorage.getItem(cityId), undefined, (favCityPrefix + cityId))
   // })
 
-  fetch("/json/cities.json", {
-    "method": "GET"
-  })
-    .then(res => { return res.text() })
-    .then(body => {
-      cities = JSON.parse(body)
-      // console.log(cities)
-      // let parent = document.getElementById("cities-list")
-      // cities.forEach((cityName) => {
-      //   parent.insertAdjacentHTML("beforeEnd", `<option value="${cityName.name}"/>`)
+  // fetch("/json/cities.json", {
+  //   "method": "GET"
+  // })
+  //   .then(res => { return res.text() })
+  //   .then(body => {
+  //     cities = JSON.parse(body)
+  //     // console.log(cities)
+  //     // let parent = document.getElementById("cities-list")
+  //     // cities.forEach((cityName) => {
+  //     //   parent.insertAdjacentHTML("beforeEnd", `<option value="${cityName.name}"/>`)
 
-      // })
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  //     // })
+  //   })
+  //   .catch(err => {
+  //     console.error(err);
+  //   });
 
 });

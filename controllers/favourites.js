@@ -1,12 +1,5 @@
-const fs = require('fs')
-const path = require('path')
 const firestore = require('../utils/db')
-const cities = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'public', 'json', 'cities.json')))
-
-
-const findIdByName = (name) => {
-    return cities.find(element => element.name == name)
-}
+const CitiesCollection = require('../models/CitiesCollection')
 
 exports.getAllFavouritesCities = async (req, res, next) => {
     try {
@@ -25,7 +18,7 @@ exports.getAllFavouritesCities = async (req, res, next) => {
 
 exports.postAddFavourites = async (req, res, next) => {
     let name = req.query.name
-    let id = findIdByName(name).id
+    let id = CitiesCollection.findCityByName(name)
     console.log(id, name)
     if (id) {
         try {
@@ -54,6 +47,21 @@ exports.deleteFavouritesCity = async (req, res, next) => {
     }
     else {
         res.status(500).send("City is undefined")
+    }
+}
+
+exports.getCity = async (req, res, next) => {
+    let name = req.query.q
+    try {
+        const city = CitiesCollection.findCityByName(name)
+        if (city) {
+            res.send(city)
+        } else {
+            res.status(500).send("City is undefined")
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(400).send(error.message)
     }
 }
 

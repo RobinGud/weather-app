@@ -11,8 +11,9 @@ exports.getWeatherByGeoCoords = (lat, lon) => {
 }
 
 const parseRequest = (data) => {
-  console.log(data.main)
+  // console.log(data)
   let obj = {
+    "id": data.id,
   "name" : data.name,
   "temp" :  `${Math.round(data.main.temp - 273)}°C`,
   "img" :  `/img/${data.weather[0].icon.slice(0, 2)}d.png`,
@@ -22,6 +23,8 @@ const parseRequest = (data) => {
   "humidity" : `${data.main.humidity} %`,
   "coord" : `[${data.coord.lat}, ${data.coord.lon}]`,
   }
+  console.log(obj)
+  return obj
 }
 
 const degToCompass = (deg) => {
@@ -47,7 +50,8 @@ const weatherRequest = async (url) => {
     })
       .then(res => { return res.text() })
       .then(body => {
-          return JSON.parse(body)
+        return parseRequest(JSON.parse(body))
+          // return JSON.parse(body)
         })
         .catch(err => {
           console.error(err);
@@ -55,3 +59,6 @@ const weatherRequest = async (url) => {
         
         return res
   }
+
+  
+  // getWeatherByCityName("Dubrovka")

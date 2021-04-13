@@ -4,8 +4,9 @@ const express = require('express')
 const app = express()
 const weatherRoutes = require('./routes/weather')
 const favouritesRoutes = require('./routes/favourites')
+const CitiesCollection = require('./models/CitiesCollection')
 
-const cities = JSON.parse(fs.readFileSync(path.join(__dirname, 'public', 'json', 'cities.json')))
+// const cities = JSON.parse(fs.readFileSync(path.join(__dirname, 'public', 'json', 'cities.json')))
 
 app.set('view engine', 'pug');
 app.set('views', 'views');
@@ -17,7 +18,7 @@ app.use('/weather', weatherRoutes)
 app.use('/favourites', favouritesRoutes)
 
 app.use('/', (req, res, next) => {
-    res.render('index', {cities: cities})
+    res.render('index', {cities: CitiesCollection.Cities})
 })
 
 app.listen(3000)
