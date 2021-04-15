@@ -1,4 +1,5 @@
 const dotenv = require('dotenv')
+const firebase = require('firebase')
 
 dotenv.config()
 
@@ -12,7 +13,6 @@ const firebaseConfig = {
     measurementId: process.env.MEASUREMENT_ID
   }
 
-  const firebase = require('firebase')
   const db = firebase.initializeApp(firebaseConfig);
   const firestore = db.firestore()
 

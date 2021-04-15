@@ -140,6 +140,8 @@ const createFavoriteCityCard = () => {
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  getCurrentPosition()
+
   fetch(`${window.location.href}favourites`, {
     "method": "GET",
   })
