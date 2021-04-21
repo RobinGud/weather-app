@@ -82,13 +82,19 @@ const addFavoriteCity = () => {
     "method": "POST",
   })
   .then((res) => { 
+    if(res.status != 200) {
+      deleteTempCityCard()
+    }
     return res.text() 
   })
   .then(() => {
     reqAPI(cityName, undefined)
   })
+}
 
-
+const deleteTempCityCard = () => {
+  let card = document.querySelector(".temp")
+  card.remove()
 }
 
 
