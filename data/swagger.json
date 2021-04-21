@@ -1,0 +1,177 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Weather App"
+  },
+  "host": "appweather1.herokuapp.com",
+  "tags": [
+    {
+      "name": "weather",
+      "description": "Получение погоды"
+    },
+    {
+      "name": "favourites",
+      "description": "Операции над списком избранных городов"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/weather/city": {
+      "get": {
+        "tags": [
+          "weather"
+        ],
+        "summary": "Получить погоду по названию",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Название города",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "520": {
+            "description": "Unknown error"
+          }
+        }
+      }
+    },
+    "/weather/coordinates": {
+      "get": {
+        "tags": [
+          "weather"
+        ],
+        "summary": "Получить погоду по координатам",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Долгота",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "description": "Широта",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Must be provided lat and lon"
+          }
+        }
+      }
+    },
+    "/favourites/city": {
+      "get": {
+        "tags": [
+          "favourites"
+        ],
+        "summary": "Получения ID города по названию",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Название города",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Error"
+          },
+          "500": {
+            "description": "City is undefined"
+          }
+        }
+      }
+    },
+    "/favourites": {
+      "get": {
+        "tags": [
+          "favourites"
+        ],
+        "summary": "Получить список избранных городов",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "favourites"
+        ],
+        "summary": "Добавить город в избранное",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Название города",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Record"
+          },
+          "400": {
+            "description": "Error"
+          },
+          "500": {
+            "description": "City is undefined"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "favourites"
+        ],
+        "summary": "Удалить город из списка",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID города",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success delete"
+          },
+          "400": {
+            "description": "Error"
+          },
+          "500": {
+            "description": "City is undefined"
+          }
+        }
+      }
+    }
+  }
+}
